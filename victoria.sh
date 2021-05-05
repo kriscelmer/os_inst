@@ -4,7 +4,7 @@ git clone https://opendev.org/openstack/openstack-ansible /opt/openstack-ansible
 cd /opt/openstack-ansible && \
 git checkout stable/victoria && \
 scripts/bootstrap-ansible.sh && \
-export SCENARIO="aio_lxc_barbican_octavia" && \
+export SCENARIO="aio_lxc_heat_octavia" && \
 scripts/bootstrap-aio.sh && \
 cd playbooks && \
 openstack-ansible setup-hosts.yml && \
