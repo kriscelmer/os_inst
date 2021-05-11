@@ -12,4 +12,4 @@ openstack-ansible setup-infrastructure.yml && \
 openstack-ansible setup-openstack.yml && \
 echo "Password for admin:" && \
 grep keystone_auth_admin_password /etc/openstack_deploy/user_secrets.yml
-echo "REMINDER: installed scenario " $SCENARIO
+echo "REMINDER: installed scenario $SCENARIO"
