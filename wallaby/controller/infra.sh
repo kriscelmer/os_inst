@@ -29,7 +29,7 @@ EOF
 apt install -y rabbitmq-server && \
 rabbitmqctl add_user openstack openstack && \
 rabbitmqctl set_permissions openstack ".*" ".*" ".*" && \
-apt install -y memcached python-memcache && \
+apt install -y memcached python-memcached && \
 sed -i 's/-l 127.0.0.1/-l 10.0.0.11/' /etc/memcached.conf && \
 service memcached restart && \
 apt install -y etcd && \
