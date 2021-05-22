@@ -1,6 +1,5 @@
 #! /bin/bash
 echo "---> Installing Keystone"
-set -e
 set -x
 cat << EOF | mysql
 CREATE DATABASE keystone;
