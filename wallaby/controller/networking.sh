@@ -3,7 +3,7 @@
 echo "---> Connfiguring Networking for OpenStack"
 set +x
 apt install -y ifupdown && \
-cp interfaces /etc/network/interfaces && \
+cp os_inst/wallaby/controller/interfaces /etc/network/interfaces && \
 ifdown --force enp0s3 enp0s8 enp0s9 lo && ifup -a && \
 systemctl unmask networking && \
 systemctl enable networking && \
