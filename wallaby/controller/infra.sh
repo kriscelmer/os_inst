@@ -3,12 +3,12 @@
 echo "----> Installing OpenStack infrastructure services"
 export DEBIAN_FRONTEND=noninteractive
 set -x
-apt -qq install chrony && \
+apt install -qq chrony && \
 echo "allow 10.0.0.0/24" >> /etc/chrony/chrony.conf && \
 service chrony restart && \
 add-apt-repository cloud-archive:wallaby && \
-apt -qq install python3-openstackclient && \
-apt -qq install mariadb-server python3-pymysql && \
+apt install -qq python3-openstackclient && \
+apt install -qq mariadb-server python3-pymysql && \
 cat << EOF >  /etc/mysql/mariadb.conf.d/99-openstack.cnf
 [mysqld]
 bind-address = 10.0.0.11
@@ -28,13 +28,13 @@ y
 y
 y
 EOF
-apt -qq install rabbitmq-server && \
+apt install -qq rabbitmq-server && \
 rabbitmqctl add_user openstack openstack && \
 rabbitmqctl set_permissions openstack ".*" ".*" ".*" && \
-apt -qq install memcached python3-memcache && \
+apt install -qq memcached python3-memcache && \
 sed -i 's/-l 127.0.0.1/-l 10.0.0.11/' /etc/memcached.conf && \
 service memcached restart && \
-apt -qq install etcd && \
+apt install -qq etcd && \
 cat << EOF >>  /etc/default/etcd
 ETCD_NAME="controller"
 ETCD_DATA_DIR="/var/lib/etcd"
