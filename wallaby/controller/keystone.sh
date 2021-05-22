@@ -1,12 +1,13 @@
 #! /bin/bash
 echo "---> Installing Keystone"
+export DEBIAN_FRONTEND=noninteractive
 set -x
 cat << EOF | mysql
 CREATE DATABASE keystone;
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'openstack';
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY 'openstack';
 EOF
-apt -qq install -y keystone crudini
+apt -qq install keystone crudini
 crudini --set /etc/keystone/keystone.conf database connection "mysql+pymysql://keystone:openstack@controller/keystone"
 crudini --set /etc/keystone/keystone.conf token provider fernet
 su -s /bin/sh -c "keystone-manage db_sync" keystone
