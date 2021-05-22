@@ -22,3 +22,14 @@ crudini --set /etc/neutron/neutron.conf DEFAULT service_plugins router
 crudini --set /etc/neutron/neutron.conf DEFAULT allow_overlapping_ips true
 crudini --set /etc/neutron/neutron.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller'
 crudini --set /etc/neutron/neutron.conf DEFAULT auth_strategy keystone
+crudini --set /etc/neutron/neutron.conf keystone_authtoken www_authenticate_uri http://controller:5000
+crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_url http://controller:5000
+crudini --set /etc/neutron/neutron.conf keystone_authtoken memcached_servers controller:11211
+crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_type password
+crudini --set /etc/neutron/neutron.conf keystone_authtoken project_domain_name default
+crudini --set /etc/neutron/neutron.conf keystone_authtoken user_domain_name default
+crudini --set /etc/neutron/neutron.conf keystone_authtoken project_name service
+crudini --set /etc/neutron/neutron.conf keystone_authtoken username neutron
+crudini --set /etc/neutron/neutron.conf keystone_authtoken password openstack
+crudini --set /etc/neutron/neutron.conf DEFAULT notify_nova_on_port_status_changes true
+crudini --set /etc/neutron/neutron.conf DEFAULT notify_nova_on_port_data_changes true
