@@ -33,3 +33,12 @@ crudini --set /etc/neutron/neutron.conf keystone_authtoken username neutron
 crudini --set /etc/neutron/neutron.conf keystone_authtoken password openstack
 crudini --set /etc/neutron/neutron.conf DEFAULT notify_nova_on_port_status_changes true
 crudini --set /etc/neutron/neutron.conf DEFAULT notify_nova_on_port_data_changes true
+crudini --set /etc/neutron/neutron.conf nova auth_url http://controller:5000
+crudini --set /etc/neutron/neutron.conf nova auth_type password
+crudini --set /etc/neutron/neutron.conf nova project_domain_name default
+crudini --set /etc/neutron/neutron.conf nova user_domain_name default
+crudini --set /etc/neutron/neutron.conf nova region_name RegionOne
+crudini --set /etc/neutron/neutron.conf nova project_name service
+crudini --set /etc/neutron/neutron.conf nova username nova
+crudini --set /etc/neutron/neutron.conf nova password openstack
+crudini --set /etc/neutron/neutron.conf oslo_concurrency lock_path /var/lib/neutron/tmp
