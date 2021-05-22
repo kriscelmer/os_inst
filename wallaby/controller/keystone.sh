@@ -9,7 +9,6 @@ EOF
 apt install -y keystone crudini && \
 crudini --set /etc/keystone/keystone.conf database connection "mysql+pymysql://keystone:openstack@controller/keystone" && \
 crudini --set /etc/keystone/keystone.conf token provider fernet && \
-EOF
 su -s /bin/sh -c "keystone-manage db_sync" keystone && \
 keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone && \
 keystone-manage credential_setup --keystone-user keystone --keystone-group keystone && \
