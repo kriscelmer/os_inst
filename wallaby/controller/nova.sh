@@ -22,3 +22,16 @@ openstack endpoint create --region RegionOne compute public http://controller:87
 openstack endpoint create --region RegionOne compute internal http://controller:8774/v2.1
 openstack endpoint create --region RegionOne compute admin http://controller:8774/v2.1
 apt install -y nova-api nova-conductor nova-novncproxy nova-scheduler > /dev/null
+crudini --set /etc/nova/nova.conf api_database connection 'mysql+pymysql://nova:openstack@controller/nova_api'
+crudini --set /etc/nova/nova.conf database connection 'mysql+pymysql://nova:openstack@controller/nova'
+crudini --set /etc/nova/nova.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
+crudini --set /etc/nova/nova.conf api auth_strategy keystone
+crudini --set /etc/nova/nova.conf keystone_authtoken www_authenticate_uri http://controller:5000/
+crudini --set /etc/nova/nova.conf keystone_authtoken auth_url http://controller:5000/
+crudini --set /etc/nova/nova.conf keystone_authtoken memcached_servers controller:11211
+crudini --set /etc/nova/nova.conf keystone_authtoken auth_type password
+crudini --set /etc/nova/nova.conf keystone_authtoken project_domain_name Default
+crudini --set /etc/nova/nova.conf keystone_authtoken user_domain_name Default
+crudini --set /etc/nova/nova.conf keystone_authtoken project_name service
+crudini --set /etc/nova/nova.conf keystone_authtoken username nova
+crudini --set /etc/nova/nova.conf keystone_authtoken password openstack
