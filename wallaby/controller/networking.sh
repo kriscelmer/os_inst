@@ -11,4 +11,8 @@ systemctl restart networking && \
 systemctl stop systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online && \
 systemctl disable systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online && \
 systemctl mask systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online && \
-apt-get --assume-yes purge nplan netplan.io
+apt-get --assume-yes purge nplan netplan.io && \
+echo "DNS=8.8.8.8 8.8.4.4" >> /etc/systemd/resolved.conf && \
+systemctl restart systemd-resolved && \
+set -x
+echo "---> Networking configured"
