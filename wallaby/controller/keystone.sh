@@ -1,6 +1,6 @@
 #! /bin/bash
 echo "---> Installing Keystone"
-set +x
+set -x
 cat << EOF | mysql
 CREATE DATABASE keystone;
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'openstack';
@@ -28,5 +28,5 @@ export OS_PROJECT_DOMAIN_NAME=Default
 export OS_AUTH_URL=http://controller:5000/v3
 export OS_IDENTITY_API_VERSION=3
 EOF
-set -x
+set +x
 echo "---> Keystone installed"
