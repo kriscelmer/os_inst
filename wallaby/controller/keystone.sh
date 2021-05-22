@@ -6,7 +6,7 @@ CREATE DATABASE keystone;
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'openstack';
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY 'openstack';
 EOF
-apt install -y keystone && \
+apt install -y keystone crudini && \
 crudini --set /etc/keystone/keystone.conf database connection "mysql+pymysql://keystone:openstack@controller/keystone" && \
 crudini --set /etc/keystone/keystone.conf token provider fernet && \
 EOF
