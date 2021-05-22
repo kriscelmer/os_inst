@@ -35,3 +35,17 @@ crudini --set /etc/nova/nova.conf keystone_authtoken user_domain_name Default
 crudini --set /etc/nova/nova.conf keystone_authtoken project_name service
 crudini --set /etc/nova/nova.conf keystone_authtoken username nova
 crudini --set /etc/nova/nova.conf keystone_authtoken password openstack
+crudini --set /etc/nova/nova.conf DEFAULT my_ip 10.0.0.11
+crudini --set /etc/nova/nova.conf vnc enabled true
+crudini --set /etc/nova/nova.conf vnc server_listen '$my_ip'
+crudini --set /etc/nova/nova.conf vnc server_proxyclient_address '$my_ip'
+crudini --set /etc/nova/nova.conf glance api_servers http://controller:9292
+crudini --set /etc/nova/nova.conf oslo_concurrency lock_path /var/lib/nova/tmp
+crudini --set /etc/nova/nova.conf placement region_name RegionOne
+crudini --set /etc/nova/nova.conf placement project_domain_name Default
+crudini --set /etc/nova/nova.conf placement project_name service
+crudini --set /etc/nova/nova.conf placement auth_type password
+crudini --set /etc/nova/nova.conf placement user_domain_name Default
+crudini --set /etc/nova/nova.conf placement auth_url http://controller:5000/v3
+crudini --set /etc/nova/nova.conf placement username placement
+crudini --set /etc/nova/nova.conf placement password openstack
