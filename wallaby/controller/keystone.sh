@@ -27,3 +27,14 @@ export OS_IDENTITY_API_VERSION=3
 EOF
 set +x
 echo "---> Keystone installed"
+echo "---> Configuring domains, users and projects"
+set -x
+openstack domain create --description "An Example Domain" example
+openstack project create --domain default --description "Service Project" service
+openstack project create --domain default --description "Demo Project" myproject
+openstack user create --domain default --password openstack myuser
+openstack role create myrole
+openstack role add --project myproject --user myuser myrole
+openstack user list
+set +x
+echo "Keystone configured"
