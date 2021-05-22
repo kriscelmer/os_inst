@@ -49,3 +49,18 @@ crudini --set /etc/nova/nova.conf placement user_domain_name Default
 crudini --set /etc/nova/nova.conf placement auth_url http://controller:5000/v3
 crudini --set /etc/nova/nova.conf placement username placement
 crudini --set /etc/nova/nova.conf placement password openstack
+su -s /bin/sh -c "nova-manage api_db sync" nova
+su -s /bin/sh -c "nova-manage cell_v2 map_cell0" nova
+su -s /bin/sh -c "nova-manage cell_v2 create_cell --name=cell1 --verbose" nova
+su -s /bin/sh -c "nova-manage db sync" nova
+su -s /bin/sh -c "nova-manage cell_v2 list_cells" nova
+service nova-api restart
+service nova-scheduler restart
+service nova-conductor restart
+service nova-novncproxy restart
+openstack compute service list
+openstack catalog list
+openstack image list
+nova-status upgrade check
+set +x
+echo "---> Nova on controller installed"
