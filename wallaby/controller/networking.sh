@@ -1,8 +1,9 @@
 #! /bin/bash
 
 echo "---> Connfiguring Networking for OpenStack"
+export DEBIAN_FRONTEND=noninteractive
 set -x
-apt -qq install -y ifupdown && \
+apt -qq install ifupdown && \
 cp os_inst/wallaby/controller/interfaces /etc/network/interfaces && \
 ifdown --force enp0s3 enp0s8 enp0s9 lo && ifup -a && \
 systemctl unmask networking && \
