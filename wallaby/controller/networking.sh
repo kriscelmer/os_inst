@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "---> Connfiguring Networking for OpenStack"
+echo "---> Configuring Networking for OpenStack"
 set -e
 set -x
 apt -y install ifupdown > /dev/null
