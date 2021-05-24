@@ -3,7 +3,6 @@
 echo "---> Installing nova on compute1"
 set -e
 set -x
-add-apt-repository -y cloud-archive:wallaby
 apt install -y nova-compute crudini > /dev/null
 crudini --set /etc/nova/nova.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller'
 crudini --set /etc/nova/nova.conf DEFAULT my_ip 10.0.0.31
