@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "---> Installing glance"
+echo "---> Installing nova on controller"
 set -e
 set -x
 cat << EOF | mysql
