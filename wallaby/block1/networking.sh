@@ -5,7 +5,7 @@ set -e
 set -x
 apt -y install ifupdown > /dev/null
 cp os_inst/wallaby/block1/interfaces /etc/network/interfaces
-ifdown --force enp0s3 enp0s8 enp0s9 lo && ifup -a
+ifdown --force enp0s3 enp0s8 lo && ifup -a
 systemctl unmask networking
 systemctl enable networking
 systemctl restart networking
