@@ -3,7 +3,7 @@
 echo "---> Installing neutron on compute1"
 set -e
 set -x
-apt install -y neutron-linuxbridge-agent crudini > /dev/null
+apt install -y neutron-linuxbridge-agent > /dev/null
 crudini --del /etc/neutron/neutron.conf database connection
 crudini --set /etc/neutron/neutron.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller'
 crudini --set /etc/neutron/neutron.conf DEFAULT auth_strategy keystone
