@@ -3,6 +3,7 @@
 echo "---> cinder on block1"
 set -e
 set -x
+add-apt-repository -y cloud-archive:wallaby
 apt install -y lvm2 thin-provisioning-tools tgt crudini > /dev/null
 pvcreate /dev/sdb
 vgcreate cinder-volumes /dev/sdb
