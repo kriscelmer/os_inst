@@ -32,14 +32,6 @@ crudini --set /etc/nova/nova.conf placement username placement
 crudini --set /etc/nova/nova.conf placement password openstack
 crudini --set /etc/nova/nova.conf cinder os_region_name RegionOne
 crudini --set /etc/nova/nova.conf libvirt virt_type qemu
-crudini --set /etc/nova/nova.conf neutron auth_url http://controller:5000
-crudini --set /etc/nova/nova.conf neutron auth_type password
-crudini --set /etc/nova/nova.conf neutron project_domain_name default
-crudini --set /etc/nova/nova.conf neutron user_domain_name default
-crudini --set /etc/nova/nova.conf neutron region_name RegionOne
-crudini --set /etc/nova/nova.conf neutron project_name service
-crudini --set /etc/nova/nova.conf neutron username neutron
-crudini --set /etc/nova/nova.conf neutron password openstack
 service nova-compute restart
 set +x
 echo "---> Nova installed on compute1"
