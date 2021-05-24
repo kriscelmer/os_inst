@@ -29,6 +29,7 @@ crudini --set /etc/cinder/cinder.conf lvm volume_group cinder-volumes
 crudini --set /etc/cinder/cinder.conf lvm target_protocol iscsi
 crudini --set /etc/cinder/cinder.conf lvm target_helper tgtadm
 service tgt restart
+systemctl enable cinder-volume
 service cinder-volume restart
 set +x
 echo "---> cinder on block1 installed"
