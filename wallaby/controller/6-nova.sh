@@ -27,8 +27,8 @@ crudini --set /etc/nova/nova.conf database connection 'mysql+pymysql://nova:open
 crudini --set /etc/nova/nova.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
 crudini --del /etc/nova/nova.conf DEFAULT log_dir
 crudini --set /etc/nova/nova.conf api auth_strategy keystone
-crudini --set /etc/nova/nova.conf keystone_authtoken www_authenticate_uri http://controller:5000/
-crudini --set /etc/nova/nova.conf keystone_authtoken auth_url http://controller:5000/
+crudini --set /etc/nova/nova.conf keystone_authtoken www_authenticate_uri http://controller:5000/v3
+crudini --set /etc/nova/nova.conf keystone_authtoken auth_url http://controller:5000/v3
 crudini --set /etc/nova/nova.conf keystone_authtoken memcached_servers controller:11211
 crudini --set /etc/nova/nova.conf keystone_authtoken auth_type password
 crudini --set /etc/nova/nova.conf keystone_authtoken project_domain_name Default
