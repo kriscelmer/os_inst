@@ -39,6 +39,7 @@ su -s /bin/sh -c "cinder-manage db sync" cinder
 crudini --set /etc/nova/nova.conf os_region_name RegionOne
 service nova-api restart
 service cinder-scheduler restart
+systemctl enable cinder-scheduler
 service apache2 restart
 set +x
 echo "---> Cinder on the controller is installed"
