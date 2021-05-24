@@ -22,11 +22,11 @@ openstack endpoint create --region RegionOne volumev3 internal http://controller
 openstack endpoint create --region RegionOne volumev3 admin http://controller:8776/v3/%\(project_id\)s
 apt install -y cinder-api cinder-scheduler > /dev/null
 crudini --set /etc/cinder/cinder.conf database connection 'mysql+pymysql://cinder:openstack@controller/cinder'
-crudini --set /etc/cinder/cinder.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller'
+crudini --set /etc/cinder/cinder.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
 crudini --set /etc/cinder/cinder.conf DEFAULT auth_strategy keystone
 crudini --set /etc/cinder/cinder.conf DEFAULT my_ip 10.0.0.11
-crudini --set /etc/cinder/cinder.conf keystone_authtoken www_authenticate_uri http://controller:5000
-crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_url http://controller:5000
+crudini --set /etc/cinder/cinder.conf keystone_authtoken www_authenticate_uri http://controller:5000/v3
+crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_url http://controller:5000/v3
 crudini --set /etc/cinder/cinder.conf keystone_authtoken memcached_servers controller:11211
 crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_type password
 crudini --set /etc/cinder/cinder.conf keystone_authtoken project_domain_name default
