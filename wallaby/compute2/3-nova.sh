@@ -31,6 +31,8 @@ crudini --set /etc/nova/nova.conf placement auth_url http://controller:5000/v3
 crudini --set /etc/nova/nova.conf placement username placement
 crudini --set /etc/nova/nova.conf placement password openstack
 crudini --set /etc/nova/nova.conf cinder os_region_name RegionOne
+crudini --del /etc/nova/nova.conf api_database connection
+crudini --del /etc/nova/nova.conf database connection
 crudini --set /etc/nova/nova-compute.conf libvirt virt_type qemu
 service nova-compute restart
 set +x
