@@ -11,7 +11,7 @@ EOF
 
 . admin-openrc
 openstack user create --domain default --password openstack cinder
-openstack role add --project service --user cinder admin
+openstack role add --project service --user cinder admin 
 openstack service create --name cinderv2 --description "OpenStack Block Storage" volumev2
 openstack service create --name cinderv3 --description "OpenStack Block Storage" volumev3
 openstack endpoint create --region RegionOne volumev2 public 'http://controller:8776/v2/%(project_id)s'
@@ -21,6 +21,11 @@ openstack endpoint create --region RegionOne volumev3 public 'http://controller:
 openstack endpoint create --region RegionOne volumev3 internal 'http://controller:8776/v3/%(project_id)s'
 openstack endpoint create --region RegionOne volumev3 admin 'http://controller:8776/v3/%(project_id)s'
 apt install -y cinder-api cinder-scheduler > /dev/null
+crudini --del /etc/cinder/cinder.conf DEFAULT iscsi_helper
+crudini --del /etc/cinder/cinder.conf DEFAULT volume_name_template
+crudini --del /etc/cinder/cinder.conf DEFAULT volume_group
+crudini --del /etc/cinder/cinder.conf DEFAULT volumes_dir
+crudini --del /etc/cinder/cinder.conf DEFAULT enabled_backends
 crudini --set /etc/cinder/cinder.conf database connection 'mysql+pymysql://cinder:openstack@controller/cinder'
 crudini --set /etc/cinder/cinder.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
 crudini --set /etc/cinder/cinder.conf DEFAULT auth_strategy keystone
