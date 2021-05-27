@@ -3,7 +3,7 @@
 set -x
 set -e
 
-for script in os_inst/wallaby/controller/[2-8]*
+for script in os_inst/wallaby/controller/[2-9]*
 do
   bash $script
 done
