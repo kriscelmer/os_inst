@@ -28,7 +28,7 @@ crudini --set /etc/cinder/cinder.conf lvm volume_driver cinder.volume.drivers.lv
 crudini --set /etc/cinder/cinder.conf lvm volume_group cinder-volumes
 crudini --set /etc/cinder/cinder.conf lvm target_protocol iscsi
 crudini --set /etc/cinder/cinder.conf lvm target_helper tgtadm
-echo "include /var/etc/cinder/volumes/*" >> /etc/tgt/targets.conf
+echo "include /var/lib/cinder/volumes/*" >> /etc/tgt/targets.conf
 service tgt restart
 systemctl enable cinder-volume
 service cinder-volume restart
