@@ -3,6 +3,9 @@
 echo "---> Configuring Networking for OpenStack"
 set -e
 set -x
+apt update > /dev/null
+apt -y dist-upgrade > /dev/null
+echo "openstack ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 apt -y install ifupdown > /dev/null
 cp os_inst/wallaby/compute2/interfaces /etc/network/interfaces
 ifdown --force enp0s3 enp0s8 enp0s9 lo && ifup -a
