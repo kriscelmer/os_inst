@@ -5,8 +5,10 @@ set -e
 set -x
 apt install -y lvm2 thin-provisioning-tools tgt crudini > /dev/null
 pvcreate /dev/sdb
+pvcreate /dev/sdc
 vgcreate cinder-volumes /dev/sdb
-sed -i '/^devices/a \ \ \ \ \ \ \ \ filter = \[ \"a\/sdb\/"\, \"r\/\.\*\/\"\]' /etc/lvm/lvm.conf
+vgcreate cinder-volumes-2 /dev/sdc
+sed -i '/^devices/a \ \ \ \ \ \ \ \ filter = \[ \"a\/sdb\/"\, \"a\/sdc\/"\, \"r\/\.\*\/\"\]' /etc/lvm/lvm.conf
 apt install -y cinder-volume > /dev/null
 crudini --set /etc/cinder/cinder.conf database connection 'mysql+pymysql://cinder:openstack@controller/cinder'
 crudini --set /etc/cinder/cinder.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
@@ -28,6 +30,10 @@ crudini --set /etc/cinder/cinder.conf lvm volume_driver cinder.volume.drivers.lv
 crudini --set /etc/cinder/cinder.conf lvm volume_group cinder-volumes
 crudini --set /etc/cinder/cinder.conf lvm target_protocol iscsi
 crudini --set /etc/cinder/cinder.conf lvm target_helper tgtadm
+crudini --set /etc/cinder/cinder.conf lvm-2 volume_driver cinder.volume.drivers.lvm.LVMVolumeDriver
+crudini --set /etc/cinder/cinder.conf lvm-2 volume_group cinder-volumes-2
+crudini --set /etc/cinder/cinder.conf lvm-2 target_protocol iscsi
+crudini --set /etc/cinder/cinder.conf lvm-2 target_helper tgtadm
 echo "include /var/lib/cinder/volumes/*" > /etc/tgt/conf.d/cinder.conf
 service tgt restart
 systemctl enable cinder-volume
