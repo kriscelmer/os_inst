@@ -17,6 +17,7 @@ crudini --set /etc/cinder/cinder.conf DEFAULT my_ip 10.0.0.51
 crudini --set /etc/cinder/cinder.conf DEFAULT enabled_backends lvm
 crudini --set /etc/cinder/cinder.conf DEFAULT glance_api_servers http://controller:9292
 crudini --set /etc/cinder/cinder.conf DEFAULT lock_path /var/lib/cinder/tmp
+crudini --set /etc/cinder/cinder.conf DEFAULT default_volume_type lvm
 crudini --set /etc/cinder/cinder.conf keystone_authtoken www_authenticate_uri http://controller:5000/v3
 crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_url http://controller:5000/v3
 crudini --set /etc/cinder/cinder.conf keystone_authtoken memcached_servers controller:11211
@@ -30,10 +31,12 @@ crudini --set /etc/cinder/cinder.conf lvm volume_driver cinder.volume.drivers.lv
 crudini --set /etc/cinder/cinder.conf lvm volume_group cinder-volumes
 crudini --set /etc/cinder/cinder.conf lvm target_protocol iscsi
 crudini --set /etc/cinder/cinder.conf lvm target_helper tgtadm
+crudini --set /etc/cinder/cinder.conf lvm volume_backend_name LVM
 crudini --set /etc/cinder/cinder.conf lvm-2 volume_driver cinder.volume.drivers.lvm.LVMVolumeDriver
 crudini --set /etc/cinder/cinder.conf lvm-2 volume_group cinder-volumes-2
 crudini --set /etc/cinder/cinder.conf lvm-2 target_protocol iscsi
 crudini --set /etc/cinder/cinder.conf lvm-2 target_helper tgtadm
+crudini --set /etc/cinder/cinder.conf lvm-2 volume_backend_name LVM-2
 echo "include /var/lib/cinder/volumes/*" > /etc/tgt/conf.d/cinder.conf
 service tgt restart
 systemctl enable cinder-volume
