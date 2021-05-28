@@ -8,6 +8,6 @@ iface enp0s3 inet dhcp
 
 auto enp0s8
 iface enp0s8 inet static
-  address 10.0.0.51
+  address 10.0.0.41
   netmask 255.255.255.0
   broadcast 10.0.0.255
