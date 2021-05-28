@@ -2,7 +2,7 @@
 
 set -e
 set -x
-echo ---> Installing OpenStack Client"
+echo "---> Installing OpenStack Client"
 apt install -y python3-openstackclient
 cat << EOF > admin-openrc
 export OS_USERNAME=admin
