@@ -20,6 +20,7 @@ echo "DNS=8.8.8.8 8.8.4.4" >> /etc/systemd/resolved.conf
 systemctl restart systemd-resolved
 cat << EOF > /etc/hosts
 127.0.0.1 localhost
+10.0.0.2 console
 10.0.0.11 controller
 10.0.0.31 compute1
 10.0.0.32 compute2
