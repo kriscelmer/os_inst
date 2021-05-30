@@ -32,5 +32,9 @@ crudini --set /etc/swift/proxy-server.conf filter:authtoken username swift
 crudini --set /etc/swift/proxy-server.conf filter:authtoken password openstack
 crudini --set /etc/swift/proxy-server.conf filter:authtoken delay_auth_decision True
 crudini --set /etc/swift/proxy-server.conf filter:cache use 'egg:swift#memcache'
+crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_suffix open
+crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_prefix stack
+crudini --set /etc/swift/swift.conf storage-policy:0 name Policy-0
+crudini --set /etc/swift/swift.conf storage-policy:0 default yes
 crudini --set /etc/swift/proxy-server.conf filter:cache memcache_servers controller:11211
 curl -o /etc/swift/swift.conf https://opendev.org/openstack/swift/raw/branch/stable/wallaby/etc/swift.conf-sample
