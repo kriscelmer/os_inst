@@ -16,3 +16,18 @@ crudini --set /etc/swift/proxy-server.conf DEFAULT bind_port 8080
 crudini --set /etc/swift/proxy-server.conf DEFAULT user swift
 crudini --set /etc/swift/proxy-server.conf DEFAULT swift_dir /etc/swift
 crudini --set /etc/swift/proxy-server.conf pipeline:main pipeline 'catch_errors gatekeeper healthcheck proxy-logging cache container_sync bulk ratelimit authtoken keystoneauth container-quotas account-quotas slo dlo versioned_writes proxy-logging proxy-server'
+crudini --set /etc/swift/proxy-server.conf app:proxy-server use 'egg:swift#proxy'
+crudini --set /etc/swift/proxy-server.conf app:proxy-server account_autocreate True
+crudini --set /etc/swift/proxy-server.conf filter:keystoneauth use 'egg:swift#keystoneauth'
+crudini --set /etc/swift/proxy-server.conf filter:keystoneauth operator_roles 'admin,user'
+crudini --set /etc/swift/proxy-server.conf filter:authtoken paste.filter_factory keystonemiddleware.auth_token:filter_factory
+crudini --set /etc/swift/proxy-server.conf filter:authtoken auth_uri http://controller:5000/v3
+crudini --set /etc/swift/proxy-server.conf filter:authtoken auth_url http://controller:5000/v3
+crudini --set /etc/swift/proxy-server.conf filter:authtoken memcached_servers controller:11211
+crudini --set /etc/swift/proxy-server.conf filter:authtoken auth_type password
+crudini --set /etc/swift/proxy-server.conf filter:authtoken project_domain_name default
+crudini --set /etc/swift/proxy-server.conf filter:authtoken user_domain_name default
+crudini --set /etc/swift/proxy-server.conf filter:authtoken project_name service
+crudini --set /etc/swift/proxy-server.conf filter:authtoken username swift
+crudini --set /etc/swift/proxy-server.conf filter:authtoken password openstack
+crudini --set /etc/swift/proxy-server.conf filter:authtoken delay_auth_decision True
