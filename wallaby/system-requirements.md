@@ -11,7 +11,7 @@
 
 ## **console** node:
 - 1 vCPU
-- 512 MB vRAM
+- 1024 MB vRAM
 - networks:
   - Adapter 1: NAT
   - Adapter 2: Host-only, network #2
@@ -21,7 +21,7 @@
 
 ## **block1** node:
 - 1 vCPU
-- 512 MB vRAM
+- 1024 MB vRAM
 - networks:
   - Adapter 1: NAT
   - Adapter 2: Host-only, network #2
@@ -52,7 +52,7 @@
 
 ## **object1** node:
 - 1 vCPU
-- 512 MB vRAM
+- 1024 MB vRAM
 - networks:
   - Adapter 1: NAT
   - Adapter 2: Host-only, network #2
@@ -63,7 +63,7 @@
 
 ## **object2** node:
 - 1 vCPU
-- 512 MB vRAM
+- 1024 MB vRAM
 - networks:
   - Adapter 1: NAT
   - Adapter 2: Host-only, network #2
