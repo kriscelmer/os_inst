@@ -38,3 +38,7 @@ crudini --set /etc/swift/swift.conf storage-policy:0 name Policy-0
 crudini --set /etc/swift/swift.conf storage-policy:0 default yes
 crudini --set /etc/swift/proxy-server.conf filter:cache memcache_servers controller:11211
 curl -o /etc/swift/swift.conf https://opendev.org/openstack/swift/raw/branch/stable/wallaby/etc/swift.conf-sample
+chown -R root:swift /etc/swift
+service swift-proxy restart
+set +x
+echo "---> Swift installed on controller"
