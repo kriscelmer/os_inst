@@ -49,3 +49,25 @@
   - Adapter 3: NAT network **provider**
 - disks:
   - disk1: 10GB (sda)
+
+## **object1** node:
+- 1 vCPU
+- 512 MB vRAM
+- networks:
+  - Adapter 1: NAT
+  - Adapter 2: Host-only, network #2
+- disks:
+  - disk1: 10GB (sda)
+  - disk2: 10GB (sdb)
+  - disk3: 10GB (sdc)
+
+## **object2** node:
+- 1 vCPU
+- 512 MB vRAM
+- networks:
+  - Adapter 1: NAT
+  - Adapter 2: Host-only, network #2
+- disks:
+  - disk1: 10GB (sda)
+  - disk2: 10GB (sdb)
+  - disk3: 10GB (sdc)
