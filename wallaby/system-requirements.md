@@ -19,6 +19,16 @@
 - disks:
   - disk1: 10GB (sda)
 
+## **controller** node:
+- 4 vCPU
+- 8192 MB vRAM
+- networks:
+  - Adapter 1: NAT
+  - Adapter 2: Host-only, network #2
+  - Adapter 3: NAT network **provider**
+- disks:
+  - disk1: 100GB (sda)
+
 ## **block1** node:
 - 1 vCPU
 - 1024 MB vRAM
