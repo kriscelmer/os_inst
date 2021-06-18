@@ -46,7 +46,7 @@
 - networks:
   - Adapter 1: NAT
   - Adapter 2: Host-only, network #2
-  - Adapter 3: NAT network **provider**
+  - Adapter 3: NAT network **provider**, Advanced -> Promiscuous Mode: Allow All
 - disks:
   - disk1: 10GB (sda)
 
@@ -56,7 +56,7 @@
 - networks:
   - Adapter 1: NAT
   - Adapter 2: Host-only, network #2
-  - Adapter 3: NAT network **provider**
+  - Adapter 3: NAT network **provider**, Advanced -> Promiscuous Mode: Allow All
 - disks:
   - disk1: 10GB (sda)
 
