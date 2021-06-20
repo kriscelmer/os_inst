@@ -7,8 +7,8 @@ apt install -y neutron-linuxbridge-agent > /dev/null
 crudini --del /etc/neutron/neutron.conf database connection
 crudini --set /etc/neutron/neutron.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
 crudini --set /etc/neutron/neutron.conf DEFAULT auth_strategy keystone
-crudini --set /etc/neutron/neutron.conf keystone_authtoken www_authenticate_uri http://controller:5000/3
-crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_url http://controller:5000/3
+crudini --set /etc/neutron/neutron.conf keystone_authtoken www_authenticate_uri http://controller:5000/v3
+crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_url http://controller:5000/v3
 crudini --set /etc/neutron/neutron.conf keystone_authtoken memcached_servers controller:11211
 crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_type password
 crudini --set /etc/neutron/neutron.conf keystone_authtoken project_domain_name default
