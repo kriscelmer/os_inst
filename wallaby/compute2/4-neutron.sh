@@ -34,4 +34,4 @@ crudini --set /etc/nova/nova.conf neutron password openstack
 service nova-compute restart
 service neutron-linuxbridge-agent restart
 set +x 
-echo "---> Neutron on compute1 installed"
+echo "---> Neutron on compute2 installed"
