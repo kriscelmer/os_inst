@@ -18,7 +18,6 @@ crudini --set /etc/cinder/cinder.conf DEFAULT enabled_backends lvm
 crudini --set /etc/cinder/cinder.conf DEFAULT glance_api_servers http://controller:9292
 crudini --set /etc/cinder/cinder.conf DEFAULT lock_path /var/lib/cinder/tmp
 crudini --set /etc/cinder/cinder.conf DEFAULT default_volume_type lvm
-crudini --set /etc/cinder/cinder.conf DEFAULT use_chap_auth False
 crudini --set /etc/cinder/cinder.conf keystone_authtoken www_authenticate_uri http://controller:5000/v3
 crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_url http://controller:5000/v3
 crudini --set /etc/cinder/cinder.conf keystone_authtoken memcached_servers controller:11211
