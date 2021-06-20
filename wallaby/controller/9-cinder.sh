@@ -30,7 +30,6 @@ crudini --set /etc/cinder/cinder.conf database connection 'mysql+pymysql://cinde
 crudini --set /etc/cinder/cinder.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
 crudini --set /etc/cinder/cinder.conf DEFAULT auth_strategy keystone
 crudini --set /etc/cinder/cinder.conf DEFAULT my_ip 10.0.0.11
-crudini --set /etc/cinder/cinder.conf DEFAULT use_chap_auth False
 crudini --set /etc/cinder/cinder.conf keystone_authtoken www_authenticate_uri http://controller:5000/v3
 crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_url http://controller:5000/v3
 crudini --set /etc/cinder/cinder.conf keystone_authtoken memcached_servers controller:11211
