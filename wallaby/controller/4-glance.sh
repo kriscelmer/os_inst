@@ -33,8 +33,8 @@ crudini --set  /etc/glance/glance-api.conf glance_store filesystem_store_datadir
 su -s /bin/sh -c "glance-manage db_sync" glance
 systemctl enable glance-api
 service glance-api restart
-wget http://download.cirros-cloud.net/0.5.2/cirros-0.5.2-x86_64-disk.img
-glance image-create --name "cirros" --file cirros-0.5.2-x86_64-disk.img --disk-format qcow2 --container-format bare --visibility=public
+wget http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img
+glance image-create --name "cirros" --file cirros-0.4.0-x86_64-disk.img --disk-format qcow2 --container-format bare --visibility=public
 openstack image list
 set +x
 echo "---> Glance installed and configured"
