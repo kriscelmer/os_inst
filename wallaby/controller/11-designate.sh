@@ -14,6 +14,6 @@ GRANT ALL PRIVILEGES ON designate.* TO 'designate'@'localhost' IDENTIFIED BY 'op
 GRANT ALL PRIVILEGES ON designate.* TO 'designate'@'%' IDENTIFIED BY 'openstack';
 EOF
 apt-get install -y bind9 bind9utils bind9-doc > /dev/null
-rndc-confgen -a -k designate -c /etc/designate/rndc.key -r /dev/urandom
+rndc-confgen -a -k designate -c /etc/designate/rndc.key
 echo "Continue with manual config, press any key to continue..."
 read
