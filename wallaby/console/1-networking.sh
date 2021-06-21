@@ -56,3 +56,4 @@ sudo cp /tmp/hosts /etc/hosts
 rm /tmp/hosts
 set +x
 echo "---> Networking configured"
+reboot
