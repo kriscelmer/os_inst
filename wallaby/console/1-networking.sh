@@ -14,15 +14,15 @@ echo "openstack" | ssh openstack@10.0.0.11 sudo -S bash /home/openstack/os_inst/
 ssh openstack@10.0.0.11 sudo "shutdown -r +1"
 echo "---> Configuring networking on compute1..."
 ssh openstack@10.0.0.31 git clone https://github.com/kriscelmer/os_inst
-echo "openstack" | ssh openstack@10.0.0.31 sudo -S bash /home/openstack/os_inst/wallaby/controller/1-networking.sh
+echo "openstack" | ssh openstack@10.0.0.31 sudo -S bash /home/openstack/os_inst/wallaby/compute1/1-networking.sh
 ssh openstack@10.0.0.31 sudo "shutdown -r +1"
 echo "---> Configuring networking on compute2..."
 ssh openstack@10.0.0.32 git clone https://github.com/kriscelmer/os_inst
-echo "openstack" | ssh openstack@10.0.0.32 sudo -S bash /home/openstack/os_inst/wallaby/controller/1-networking.sh
+echo "openstack" | ssh openstack@10.0.0.32 sudo -S bash /home/openstack/os_inst/wallaby/compute2/1-networking.sh
 ssh openstack@10.0.0.32 sudo "shutdown -r +1"
 echo "---> Configuring networking on block1..."
 ssh openstack@10.0.0.41 git clone https://github.com/kriscelmer/os_inst
-echo "openstack" | ssh openstack@10.0.0.41 sudo -S bash /home/openstack/os_inst/wallaby/controller/1-networking.sh
+echo "openstack" | ssh openstack@10.0.0.41 sudo -S bash /home/openstack/os_inst/wallaby/block1/1-networking.sh
 ssh openstack@10.0.0.41 sudo "shutdown -r +1"
 echo "---> Configuring networking on console..."
 echo "openstack ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
