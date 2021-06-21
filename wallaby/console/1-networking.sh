@@ -29,7 +29,7 @@ sudo sh -c "echo 'openstack ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
 sudo DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade > /dev/null
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install ifupdown > /dev/null
-sudo cp os_inst/wallaby/controller/interfaces /etc/network/interfaces
+sudo cp os_inst/wallaby/console/interfaces /etc/network/interfaces
 sudo ifdown --force enp0s3 enp0s8 enp0s9 lo && ifup -a
 sudo systemctl unmask networking
 sudo systemctl enable networking
