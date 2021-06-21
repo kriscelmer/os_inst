@@ -53,5 +53,6 @@ cat << EOF > /tmp/hosts
 10.0.0.52 object2
 EOF
 sudo cp /tmp/hosts /etc/hosts
+rm /tmp/hosts
 set +x
 echo "---> Networking configured"
