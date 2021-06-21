@@ -8,11 +8,23 @@ ssh-copy-id openstack@10.0.0.11
 ssh-copy-id openstack@10.0.0.31
 ssh-copy-id openstack@10.0.0.32
 ssh-copy-id openstack@10.0.0.41
+echo "---> Configuring networking on controller..."
 ssh openstack@10.0.0.11 git clone https://github.com/kriscelmer/os_inst
 echo "openstack" | ssh openstack@10.0.0.11 sudo -S bash /home/openstack/os_inst/wallaby/controller/1-networking.sh
 ssh openstack@10.0.0.11 sudo reboot
-echo "Press Enter to continue..."
-read
+echo "---> Configuring networking on compute1..."
+ssh openstack@10.0.0.31 git clone https://github.com/kriscelmer/os_inst
+echo "openstack" | ssh openstack@10.0.0.31 sudo -S bash /home/openstack/os_inst/wallaby/controller/1-networking.sh
+ssh openstack@10.0.0.31 sudo reboot
+echo "---> Configuring networking on compute2..."
+ssh openstack@10.0.0.32 git clone https://github.com/kriscelmer/os_inst
+echo "openstack" | ssh openstack@10.0.0.32 sudo -S bash /home/openstack/os_inst/wallaby/controller/1-networking.sh
+ssh openstack@10.0.0.32 sudo reboot
+echo "---> Configuring networking on block1..."
+ssh openstack@10.0.0.41 git clone https://github.com/kriscelmer/os_inst
+echo "openstack" | ssh openstack@10.0.0.41 sudo -S bash /home/openstack/os_inst/wallaby/controller/1-networking.sh
+ssh openstack@10.0.0.41 sudo reboot
+echo "---> Configuring networking on console..."
 echo "openstack ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 sudo DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade > /dev/null
