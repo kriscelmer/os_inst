@@ -3,11 +3,11 @@
 echo "---> Configuring Networking for OpenStack"
 set -e
 set -x
-ssh-keygen -t rsa -b 256 -q -N ""
-echo "openstack" | ssh-copy-id openstack@10.0.0.11
-echo "openstack" | ssh-copy-id openstack@10.0.0.31
-echo "openstack" | ssh-copy-id openstack@10.0.0.32
-echo "openstack" | ssh-copy-id openstack@10.0.0.41
+ssh-keygen -t rsa -b 1024 -q -N ""
+ssh-copy-id openstack@10.0.0.11
+ssh-copy-id openstack@10.0.0.31
+ssh-copy-id openstack@10.0.0.32
+ssh-copy-id openstack@10.0.0.41
 ssh openstack@10.0.0.11 git clone https://github.com/kriscelmer/os_inst
 echo "openstack" | ssh openstack@10.0.0.11 sudo -S bash /home/openstack/os_inst/wallaby/controller/1-networking.sh
 ssh openstack@10.0.0.11 sudo reboot
