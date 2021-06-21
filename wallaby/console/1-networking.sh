@@ -38,9 +38,9 @@ sudo systemctl stop systemd-networkd.socket systemd-networkd networkd-dispatcher
 sudo systemctl disable systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
 sudo systemctl mask systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y --assume-yes purge nplan netplan.io > /dev/null
-sudo echo "DNS=8.8.8.8 8.8.4.4" >> /etc/systemd/resolved.conf
+sudo sh -c 'echo "DNS=8.8.8.8 8.8.4.4" >> /etc/systemd/resolved.conf'
 sudo systemctl restart systemd-resolved
-sudo cat << EOF > /etc/hosts
+cat << EOF > /tmp/hosts
 127.0.0.1 localhost
 10.0.0.2 console
 10.0.0.11 controller
@@ -52,5 +52,6 @@ sudo cat << EOF > /etc/hosts
 10.0.0.51 object1
 10.0.0.52 object2
 EOF
+sudo cp /tmp/hosts /etc/hosts
 set +x
 echo "---> Networking configured"
