@@ -13,22 +13,22 @@ echo "openstack" | ssh openstack@10.0.0.11 sudo -S bash /home/openstack/os_inst/
 ssh openstack@10.0.0.11 sudo reboot
 echo "Press Enter to continue..."
 read
-apt update > /dev/null
-apt -y dist-upgrade > /dev/null
 echo "openstack ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-apt -y install ifupdown > /dev/null
-cp os_inst/wallaby/controller/interfaces /etc/network/interfaces
-ifdown --force enp0s3 enp0s8 enp0s9 lo && ifup -a
-systemctl unmask networking
-systemctl enable networking
-systemctl restart networking
-systemctl stop systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
-systemctl disable systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
-systemctl mask systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
-apt -y --assume-yes purge nplan netplan.io > /dev/null
-echo "DNS=8.8.8.8 8.8.4.4" >> /etc/systemd/resolved.conf
-systemctl restart systemd-resolved
-cat << EOF > /etc/hosts
+sudo DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade > /dev/null
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install ifupdown > /dev/null
+sudo cp os_inst/wallaby/controller/interfaces /etc/network/interfaces
+sudo ifdown --force enp0s3 enp0s8 enp0s9 lo && ifup -a
+sudo systemctl unmask networking
+sudo systemctl enable networking
+sudo systemctl restart networking
+sudo systemctl stop systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
+sudo systemctl disable systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
+sudo systemctl mask systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y --assume-yes purge nplan netplan.io > /dev/null
+sudo echo "DNS=8.8.8.8 8.8.4.4" >> /etc/systemd/resolved.conf
+sudo systemctl restart systemd-resolved
+sudo cat << EOF > /etc/hosts
 127.0.0.1 localhost
 10.0.0.2 console
 10.0.0.11 controller
