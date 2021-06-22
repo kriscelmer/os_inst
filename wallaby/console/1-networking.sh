@@ -3,7 +3,8 @@
 echo "---> Configuring Networking for OpenStack"
 set -e
 set -x
-cp os_inst/wallaby/hosts /etc/hosts
+echo "openstack" | sudo -S sh -c "echo 'openstack ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
+sudo cp os_inst/wallaby/hosts /etc/hosts
 ssh-keygen -t rsa -b 1024 -q -N ""
 ssh-copy-id openstack@controller
 ssh-copy-id openstack@compute1
@@ -31,7 +32,6 @@ ssh openstack@storage2 git clone https://github.com/kriscelmer/os_inst
 echo "openstack" | ssh openstack@storage2 sudo -S bash /home/openstack/os_inst/wallaby/storage2/1-networking.sh
 ssh openstack@storage2 sudo "shutdown -r +1"
 echo "---> Configuring networking on console..."
-echo "openstack" | sudo -S sh -c "echo 'openstack ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
 sudo DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade > /dev/null
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install ifupdown > /dev/null
