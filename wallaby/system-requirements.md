@@ -81,3 +81,23 @@
   - disk1: 10GB (sda)
   - disk2: 10GB (sdb)
   - disk3: 10GB (sdc)
+
+## **storage1** node:
+- 1 vCPU
+- 1024 MB vRAM
+- networks:
+  - Adapter 1: NAT
+  - Adapter 2: Host-only, network #2
+- disks:
+  - disk1: 10GB (sda)
+  - disk2: 80GB (sdb)
+
+## **storage2** node:
+- 1 vCPU
+- 1024 MB vRAM
+- networks:
+  - Adapter 1: NAT
+  - Adapter 2: Host-only, network #2
+- disks:
+  - disk1: 10GB (sda)
+  - disk2: 50GB (sdb)
