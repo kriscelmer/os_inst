@@ -11,7 +11,7 @@ apt install -y cinder-volume > /dev/null
 crudini --set /etc/cinder/cinder.conf database connection 'mysql+pymysql://cinder:openstack@controller/cinder'
 crudini --set /etc/cinder/cinder.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
 crudini --set /etc/cinder/cinder.conf DEFAULT auth_strategy keystone
-crudini --set /etc/cinder/cinder.conf DEFAULT my_ip 10.0.0.41
+crudini --set /etc/cinder/cinder.conf DEFAULT my_ip 10.0.0.42
 crudini --set /etc/cinder/cinder.conf DEFAULT enabled_backends lvm2
 crudini --set /etc/cinder/cinder.conf DEFAULT glance_api_servers http://controller:9292
 crudini --set /etc/cinder/cinder.conf DEFAULT lock_path /var/lib/cinder/tmp
