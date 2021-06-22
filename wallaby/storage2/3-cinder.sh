@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "---> cinder on storage1"
+echo "---> cinder on storage2"
 set -e
 set -x
 apt install -y lvm2 thin-provisioning-tools tgt crudini > /dev/null
@@ -35,4 +35,4 @@ service tgt restart
 systemctl enable cinder-volume
 service cinder-volume restart
 set +x
-echo "---> cinder on block1 installed"
+echo "---> cinder on storage2 installed"
