@@ -3,20 +3,7 @@
 echo "---> Configuring Networking for OpenStack"
 set -e
 set -x
-cat << EOF > /tmp/hosts
-127.0.0.1 localhost
-10.0.0.2 console
-10.0.0.11 controller
-10.0.0.31 compute1
-10.0.0.32 compute2
-10.0.0.33 compute3
-10.0.0.41 block1
-10.0.0.42 block2
-10.0.0.51 object1
-10.0.0.52 object2
-EOF
-sudo cp /tmp/hosts /etc/hosts
-rm /tmp/hosts
+cp os_inst/wallaby/hosts /etc/hosts
 ssh-keygen -t rsa -b 1024 -q -N ""
 ssh-copy-id openstack@controller
 ssh-copy-id openstack@compute1
