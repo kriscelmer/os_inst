@@ -11,7 +11,7 @@ EOF
 
 . admin-openrc
 openstack user create --domain default --password openstack cinder
-openstack role add --project service --user cinder admin 
+openstack role add --project service --user cinder admin
 openstack service create --name cinderv2 --description "OpenStack Block Storage" volumev2
 openstack service create --name cinderv3 --description "OpenStack Block Storage" volumev3
 openstack endpoint create --region RegionOne volumev2 public 'http://controller:8776/v2/%(project_id)s'
@@ -30,6 +30,7 @@ crudini --set /etc/cinder/cinder.conf database connection 'mysql+pymysql://cinde
 crudini --set /etc/cinder/cinder.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
 crudini --set /etc/cinder/cinder.conf DEFAULT auth_strategy keystone
 crudini --set /etc/cinder/cinder.conf DEFAULT my_ip 10.0.0.11
+crudini --set /etc/cinder/cinder.conf DEFAULT default_volume_type lvm1
 crudini --set /etc/cinder/cinder.conf keystone_authtoken www_authenticate_uri http://controller:5000/v3
 crudini --set /etc/cinder/cinder.conf keystone_authtoken auth_url http://controller:5000/v3
 crudini --set /etc/cinder/cinder.conf keystone_authtoken memcached_servers controller:11211
