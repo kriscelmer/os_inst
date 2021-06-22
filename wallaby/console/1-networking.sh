@@ -8,7 +8,8 @@ ssh-keygen -t rsa -b 1024 -q -N ""
 ssh-copy-id openstack@controller
 ssh-copy-id openstack@compute1
 ssh-copy-id openstack@compute2
-ssh-copy-id openstack@block1
+ssh-copy-id openstack@storage1
+ssh-copy-id openstack@storage2
 echo "---> Configuring networking on controller..."
 ssh openstack@controller git clone https://github.com/kriscelmer/os_inst
 echo "openstack" | ssh openstack@controller sudo -S bash /home/openstack/os_inst/wallaby/controller/1-networking.sh
@@ -21,10 +22,14 @@ echo "---> Configuring networking on compute2..."
 ssh openstack@compute2 git clone https://github.com/kriscelmer/os_inst
 echo "openstack" | ssh openstack@compute2 sudo -S bash /home/openstack/os_inst/wallaby/compute2/1-networking.sh
 ssh openstack@compute2 sudo "shutdown -r +1"
-echo "---> Configuring networking on block1..."
-ssh openstack@block1 git clone https://github.com/kriscelmer/os_inst
-echo "openstack" | ssh openstack@block1 sudo -S bash /home/openstack/os_inst/wallaby/block1/1-networking.sh
-ssh openstack@block1 sudo "shutdown -r +1"
+echo "---> Configuring networking on storage1..."
+ssh openstack@storage1 git clone https://github.com/kriscelmer/os_inst
+echo "openstack" | ssh openstack@storage1 sudo -S bash /home/openstack/os_inst/wallaby/storage1/1-networking.sh
+ssh openstack@storage1 sudo "shutdown -r +1"
+echo "---> Configuring networking on storage2..."
+ssh openstack@storage2 git clone https://github.com/kriscelmer/os_inst
+echo "openstack" | ssh openstack@storage2 sudo -S bash /home/openstack/os_inst/wallaby/storage2/1-networking.sh
+ssh openstack@storage2 sudo "shutdown -r +1"
 echo "---> Configuring networking on console..."
 echo "openstack" | sudo -S sh -c "echo 'openstack ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
 sudo DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null
