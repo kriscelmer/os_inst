@@ -6,5 +6,12 @@ sed -i 's/^pool\ /#pool\ /g' /etc/chrony/chrony.conf
 echo "server controller iburst" >> /etc/chrony/chrony.conf
 service chrony restart
 add-apt-repository -y cloud-archive:wallaby > /dev/null
+cat << EOF | sfdisk /dev/sdb
+/dev/sdb1: size=50GB, type=8e
+/dev/sdb2: size=10GB, type=83
+/dev/sdb3: size=10GB, type=83
+/dev/sdb4: size=10GB, type=83
+write
+EOF
 set +x
 echo "---> Infra installed"
