@@ -102,6 +102,7 @@ crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_suffix open
 crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_prefix stack
 crudini --set /etc/swift/swift.conf storage-policy:0 name Policy-0
 crudini --set /etc/swift/swift.conf storage-policy:0 default yes
+curl -o /etc/swift/internal-client.conf https://opendev.org/openstack/swift/raw/branch/stable/wallaby/etc/internal-client.conf-sample
 chown -R root:swift /etc/swift
 
 swift-init all start
