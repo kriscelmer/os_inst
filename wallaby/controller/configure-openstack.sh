@@ -14,4 +14,8 @@ openstack router set router --external-gateway provider
 openstack flavor create --id 0 --vcpus 1 --ram 64 --disk 1 m1.nano
 openstack security group rule create --proto icmp default
 openstack security group rule create --proto tcp --dst-port 22 default
+openstack volume type create lvm1
+openstack volume type set lvm1 --property volume_backend_name=LVM-1
+openstack volume type create lvm2
+openstack volume type set lvm2 --property volume_backend_name=LVM-2
 echo "---> OpenStack configured"

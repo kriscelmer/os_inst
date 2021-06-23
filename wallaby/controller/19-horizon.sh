@@ -3,7 +3,7 @@
 echo "---> Installing horizon"
 set -e
 set -x
-apt install -y openstack-dashboard > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y openstack-dashboard > /dev/null
 sed -i '/^OPENSTACK_KEYSTONE_URL/c\OPENSTACK_KEYSTONE_URL="http://controller:5000/v3"' /etc/openstack-dashboard/local_settings.py
 sed -i 's/127.0.0.1/controller/g' /etc/openstack-dashboard/local_settings.py
 cat << EOF >> /etc/openstack-dashboard/local_settings.py

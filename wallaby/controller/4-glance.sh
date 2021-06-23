@@ -15,7 +15,7 @@ openstack service create --name glance --description "OpenStack Image" image
 openstack endpoint create --region RegionOne image public http://controller:9292
 openstack endpoint create --region RegionOne image internal http://controller:9292
 openstack endpoint create --region RegionOne image admin http://controller:9292
-apt install -y glance > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y glance > /dev/null
 crudini --set  /etc/glance/glance-api.conf database connection 'mysql+pymysql://glance:openstack@controller/glance'
 crudini --set  /etc/glance/glance-api.conf keystone_authtoken www_authenticate_uri 'http://controller:5000/v3'
 crudini --set  /etc/glance/glance-api.conf keystone_authtoken auth_url 'http://controller:5000/v3'

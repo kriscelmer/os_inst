@@ -3,11 +3,11 @@
 echo "---> cinder on storage2"
 set -e
 set -x
-apt install -y lvm2 thin-provisioning-tools tgt crudini > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y lvm2 thin-provisioning-tools tgt crudini > /dev/null
 pvcreate /dev/sdb1
 vgcreate cinder-volumes /dev/sdb1
 sed -i '/^devices/a \ \ \ \ \ \ \ \ filter = \[ \"a\/sdb1\/"\, \"r\/\.\*\/\"\]' /etc/lvm/lvm.conf
-apt install -y cinder-volume > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y cinder-volume > /dev/null
 crudini --set /etc/cinder/cinder.conf database connection 'mysql+pymysql://cinder:openstack@controller/cinder'
 crudini --set /etc/cinder/cinder.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
 crudini --set /etc/cinder/cinder.conf DEFAULT auth_strategy keystone

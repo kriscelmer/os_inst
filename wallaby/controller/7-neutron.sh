@@ -15,7 +15,7 @@ openstack service create --name neutron --description "OpenStack Networking" net
 openstack endpoint create --region RegionOne network public http://controller:9696
 openstack endpoint create --region RegionOne network internal http://controller:9696
 openstack endpoint create --region RegionOne network admin http://controller:9696
-apt install -y neutron-server neutron-plugin-ml2 neutron-linuxbridge-agent neutron-l3-agent neutron-dhcp-agent neutron-metadata-agent > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y neutron-server neutron-plugin-ml2 neutron-linuxbridge-agent neutron-l3-agent neutron-dhcp-agent neutron-metadata-agent > /dev/null
 crudini --set /etc/neutron/neutron.conf database connection 'mysql+pymysql://neutron:openstack@controller/neutron'
 crudini --set /etc/neutron/neutron.conf DEFAULT core_plugin ml2
 crudini --set /etc/neutron/neutron.conf DEFAULT service_plugins router

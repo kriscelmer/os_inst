@@ -20,7 +20,7 @@ openstack endpoint create --region RegionOne volumev2 admin 'http://controller:8
 openstack endpoint create --region RegionOne volumev3 public 'http://controller:8776/v3/%(project_id)s'
 openstack endpoint create --region RegionOne volumev3 internal 'http://controller:8776/v3/%(project_id)s'
 openstack endpoint create --region RegionOne volumev3 admin 'http://controller:8776/v3/%(project_id)s'
-apt install -y cinder-api cinder-scheduler > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y cinder-api cinder-scheduler > /dev/null
 crudini --del /etc/cinder/cinder.conf DEFAULT iscsi_helper
 crudini --del /etc/cinder/cinder.conf DEFAULT volume_name_template
 crudini --del /etc/cinder/cinder.conf DEFAULT volume_group

@@ -3,7 +3,7 @@
 echo "---> Installing neutron on compute1"
 set -e
 set -x
-apt install -y neutron-linuxbridge-agent > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y neutron-linuxbridge-agent > /dev/null
 crudini --del /etc/neutron/neutron.conf database connection
 crudini --set /etc/neutron/neutron.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
 crudini --set /etc/neutron/neutron.conf DEFAULT auth_strategy keystone
@@ -33,5 +33,5 @@ crudini --set /etc/nova/nova.conf neutron username neutron
 crudini --set /etc/nova/nova.conf neutron password openstack
 service nova-compute restart
 service neutron-linuxbridge-agent restart
-set +x 
+set +x
 echo "---> Neutron on compute2 installed"
