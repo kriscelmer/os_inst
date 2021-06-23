@@ -3,7 +3,7 @@
 echo "---> cinder on storage2"
 set -e
 set -x
-DEBIAN_FRONTEND=noninteractive apt-get install -y lvm2 thin-provisioning-tools tgt crudini > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y lvm2 thin-provisioning-tools tgt > /dev/null
 pvcreate /dev/sdb1
 vgcreate cinder-volumes /dev/sdb1
 sed -i '/^devices/a \ \ \ \ \ \ \ \ filter = \[ \"a\/sdb1\/"\, \"r\/\.\*\/\"\]' /etc/lvm/lvm.conf

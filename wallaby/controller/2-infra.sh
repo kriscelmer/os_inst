@@ -3,6 +3,7 @@
 echo "----> Installing OpenStack infrastructure services"
 set -e
 set -x
+DEBIAN_FRONTEND=noninteractive apt-get install -y crudini > /dev/null
 DEBIAN_FRONTEND=noninteractive apt-get install -y chrony > /dev/null
 echo "allow 10.0.0.0/24" >> /etc/chrony/chrony.conf
 service chrony restart

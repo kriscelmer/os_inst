@@ -3,7 +3,7 @@
 echo "---> Installing nova on compute1"
 set -e
 set -x
-DEBIAN_FRONTEND=noninteractive apt-get install -y nova-compute crudini > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y nova-compute > /dev/null
 crudini --set /etc/nova/nova.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
 crudini --set /etc/nova/nova.conf DEFAULT my_ip 10.0.0.31
 crudini --set /etc/nova/nova.conf api auth_strategy keystone
