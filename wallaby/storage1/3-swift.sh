@@ -8,8 +8,8 @@ mkfs.xfs /dev/sdb2
 mkfs.xfs /dev/sdb3
 mkdir -p /srv/node/sdb2
 mkdir -p /srv/node/sdb3
-uuid2 = $(blkid -o value -s UUID /dev/sdb2)
-uuid3 = $(blkid -o value -s UUID /dev/sdb3)
+uuid2=$(blkid -o value -s UUID /dev/sdb2)
+uuid3=$(blkid -o value -s UUID /dev/sdb3)
 echo "UUID=$uuid2 /srv/node/sdb2 xfs noatime 0 2" >> /etc/fstab
 echo "UUID=$uuid3 /srv/node/sdb3 xfs noatime 0 2" >> /etc/fstab
 mount /srv/node/sdb2
