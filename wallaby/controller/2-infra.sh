@@ -6,7 +6,7 @@ set -x
 DEBIAN_FRONTEND=noninteractive apt-get install -y chrony > /dev/null
 echo "allow 10.0.0.0/24" >> /etc/chrony/chrony.conf
 service chrony restart
-add-apt-repository -y cloud-archive:wallaby > /dev/null
+DEBIAN_FRONTEND=noninteractive add-apt-repository -y cloud-archive:wallaby > /dev/null
 DEBIAN_FRONTEND=noninteractive apt-get install -y python3-openstackclient > /dev/null
 DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server python3-pymysql > /dev/null
 cat << EOF >  /etc/mysql/mariadb.conf.d/99-openstack.cnf
