@@ -4,14 +4,14 @@ echo "---> Installing Swift on storage2 node"
 set -e
 set -x
 DEBIAN_FRONTEND=noninteractive apt-get install -y xfsprogs rsync > /dev/null
-mkfs.xfs /dev/sdb
-mkfs.xfs /dev/sdc
+mkfs.xfs /dev/sdb2
+mkfs.xfs /dev/sdb3
 mkdir -p /srv/node/sdb2
 mkdir -p /srv/node/sdb3
-cat << EOF >> /etc/fstab
-/dev/sdb2 /srv/node/sdb2 xfs noatime,nodiratime,nobarrier,logbufs=8 0 2
-/dev/sdb3 /srv/node/sdb3 xfs noatime,nodiratime,nobarrier,logbufs=8 0 2
-EOF
+uuid2 = $(blkid -o value -s UUID /dev/sdb2)
+uuid3 = $(blkid -o value -s UUID /dev/sdb3)
+echo "UUID=$uuid2 /srv/node/sdb2 xfs noatime 0 2" >> /etc/fstab
+echo "UUID=$uuid3 /srv/node/sdb3 xfs noatime 0 2" >> /etc/fstab
 mount /srv/node/sdb2
 mount /srv/node/sdb3
 cat << EOF > /etc/rsyncd.conf
