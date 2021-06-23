@@ -32,13 +32,34 @@ crudini --set /etc/swift/proxy-server.conf filter:authtoken username swift
 crudini --set /etc/swift/proxy-server.conf filter:authtoken password openstack
 crudini --set /etc/swift/proxy-server.conf filter:authtoken delay_auth_decision True
 crudini --set /etc/swift/proxy-server.conf filter:cache use 'egg:swift#memcache'
+crudini --set /etc/swift/proxy-server.conf filter:cache memcache_servers controller:11211
+cd /etc/swift
+swift-ring-builder account.builder create 10 3 1
+swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6202 --device sdb2 --weight 100
+swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6202 --device sdb3 --weight 100
+swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6202 --device sdb2 --weight 100
+swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6202 --device sdb3 --weight 100
+swift-ring-builder account.builder rebalance
+swift-ring-builder container.builder create 10 3 1
+swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6201 --device sdb2 --weight 100
+swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6201 --device sdb3 --weight 100
+swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6201 --device sdb2 --weight 100
+swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6201 --device sdb3 --weight 100
+swift-ring-builder container.builder rebalance
+swift-ring-builder object.builder create 10 3 1
+swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6200 --device sdb2 --weight 100
+swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6200 --device sdb3 --weight 100
+swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6200 --device sdb2 --weight 100
+swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6200 --device sdb3 --weight 100
+swift-ring-builder object.builder rebalance
+curl -o /etc/swift/swift.conf https://opendev.org/openstack/swift/raw/branch/stable/wallaby/etc/swift.conf-sample
 crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_suffix open
 crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_prefix stack
 crudini --set /etc/swift/swift.conf storage-policy:0 name Policy-0
 crudini --set /etc/swift/swift.conf storage-policy:0 default yes
-crudini --set /etc/swift/proxy-server.conf filter:cache memcache_servers controller:11211
-curl -o /etc/swift/swift.conf https://opendev.org/openstack/swift/raw/branch/stable/wallaby/etc/swift.conf-sample
 chown -R root:swift /etc/swift
+service memcached restart
 service swift-proxy restart
+
 set +x
 echo "---> Swift installed on controller"
