@@ -3,7 +3,7 @@
 echo "---> cinder on storage2"
 set -e
 set -x
-DEBIAN_FRONTEND=noninteractive apt-get install -y lvm2 thin-provisioning-tools tgt > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y lvm2 thin-provisioning-tools tgt nvme-cli > /dev/null
 pvcreate /dev/sdb1
 vgcreate cinder-volumes /dev/sdb1
 sed -i '/^devices/a \ \ \ \ \ \ \ \ filter = \[ \"a\/sdb1\/"\, \"r\/\.\*\/\"\]' /etc/lvm/lvm.conf
@@ -34,5 +34,8 @@ echo "include /var/lib/cinder/volumes/*" > /etc/tgt/conf.d/cinder.conf
 service tgt restart
 systemctl enable cinder-volume
 service cinder-volume restart
+DEBIAN_FRONTEND=noninteractive apt-get install -y cinder-backup > /dev/null
+crudini --set /etc/cinder/cinder.conf DEFAULT backup_driver cinder.backup.drivers.swift.SwiftBackupDriver
+service cinder-backup restart
 set +x
 echo "---> cinder on storage2 installed"

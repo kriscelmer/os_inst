@@ -16,6 +16,7 @@ OPENSTACK_API_VERSIONS = {
 }
 OPENSTACK_KEYSTONE_DEFAULT_DOMAIN = "Default"
 OPENSTACK_KEYSTONE_DEFAULT_ROLE = "user"
+OPENSTACK_CINDER_FEATURES = {'enable_backup': True}
 EOF
 systemctl reload apache2.service
 set +x
