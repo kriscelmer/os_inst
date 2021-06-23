@@ -3,7 +3,7 @@
 set -x
 set -e
 echo "---> Installing OpenStack Client"
-sudo apt install -y python3-openstackclient > /dev/null
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y python3-openstackclient > /dev/null
 cat << EOF > admin-openrc
 export OS_USERNAME=admin
 export OS_PASSWORD=openstack
