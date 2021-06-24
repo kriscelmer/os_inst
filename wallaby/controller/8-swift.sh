@@ -6,10 +6,8 @@ set -x
 openstack user create --domain default --password openstack swift
 openstack role add --project service --user swift admin
 openstack service create --name swift --description "OpenStack Object Storage" object-store
-#openstack endpoint create --region RegionOne object-store public 'http://controller:8080/v1/AUTH_%(tenant_id)s'
-#openstack endpoint create --region RegionOne object-store internal 'http://controller:8080/v1/AUTH_%(tenant_id)s'
-openstack endpoint create --region RegionOne object-store public 'http://controller:8080/v1'
-openstack endpoint create --region RegionOne object-store internal 'http://controller:8080/v1'
+openstack endpoint create --region RegionOne object-store public 'http://controller:8080/v1/AUTH_%(tenant_id)s'
+openstack endpoint create --region RegionOne object-store internal 'http://controller:8080/v1/AUTH_%(tenant_id)s'
 openstack endpoint create --region RegionOne object-store admin 'http://controller:8080/v1'
 DEBIAN_FRONTEND=noninteractive apt-get install -y swift swift-proxy > /dev/null
 curl -o /etc/swift/proxy-server.conf https://opendev.org/openstack/swift/raw/branch/stable/wallaby/etc/proxy-server.conf-sample
