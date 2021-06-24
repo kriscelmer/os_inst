@@ -20,8 +20,8 @@ crudini --set /etc/swift/proxy-server.conf app:proxy-server account_autocreate T
 crudini --set /etc/swift/proxy-server.conf filter:keystoneauth use 'egg:swift#keystoneauth'
 crudini --set /etc/swift/proxy-server.conf filter:keystoneauth operator_roles 'admin,user'
 crudini --set /etc/swift/proxy-server.conf filter:authtoken paste.filter_factory keystonemiddleware.auth_token:filter_factory
-crudini --set /etc/swift/proxy-server.conf filter:authtoken auth_uri http://controller:5000/v3
-crudini --set /etc/swift/proxy-server.conf filter:authtoken auth_url http://controller:5000/v3
+crudini --set /etc/swift/proxy-server.conf filter:authtoken auth_uri http://controller:5000
+crudini --set /etc/swift/proxy-server.conf filter:authtoken auth_url http://controller:5000
 crudini --set /etc/swift/proxy-server.conf filter:authtoken memcached_servers controller:11211
 crudini --set /etc/swift/proxy-server.conf filter:authtoken auth_type password
 crudini --set /etc/swift/proxy-server.conf filter:authtoken project_domain_name default

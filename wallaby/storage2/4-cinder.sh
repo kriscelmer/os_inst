@@ -38,6 +38,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y cinder-backup > /dev/null
 crudini --set /etc/cinder/cinder.conf DEFAULT backup_driver cinder.backup.drivers.swift.SwiftBackupDriver
 crudini --set /etc/cinder/cinder.conf DEFAULT backup_swift_url http://controller:8080/v1/AUTH_
 crudini --set /etc/cinder/cinder.conf DEFAULT backup_swift_auth per_user
+crudini --set /etc/cinder/cinder.conf DEFAULT backup_swift_auth_url http://controller:5000/v3
 service cinder-backup restart
 set +x
 echo "---> cinder on storage2 installed"
