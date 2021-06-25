@@ -24,9 +24,9 @@ openstack role add --domain heat --user-domain heat --user heat_domain_admin adm
 openstack role create heat_stack_owner
 openstack role add --project myproject --user myuser heat_stack_owner
 openstack role create heat_stack_user
-DEBIAN_FRONTEND=noninteractive apt-get install -y heat-api heat-api-cfn heat-engine > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y heat-api heat-api-cfn heat-engine python3-vitrageclient python3-zunclient > /dev/null
 crudini --set /etc/heat/heat.conf database connection 'mysql+pymysql://heat:openstack@controller/heat'
-crudini --set /etc/heat/heat.conf DEFAULT transport_url 'rabbit://openstack:openstackS@controller'
+crudini --set /etc/heat/heat.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller'
 crudini --set /etc/heat/heat.conf keystone_authtoken www_authenticate_uri http://controller:5000/v3
 crudini --set /etc/heat/heat.conf keystone_authtoken auth_url http://controller:5000/v3
 crudini --set /etc/heat/heat.conf keystone_authtoken memcached_servers controller:11211
