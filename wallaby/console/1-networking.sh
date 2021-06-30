@@ -48,4 +48,4 @@ sudo sh -c 'echo "DNS=8.8.8.8 8.8.4.4" >> /etc/systemd/resolved.conf'
 sudo systemctl restart systemd-resolved
 set +x
 echo "---> Networking configured"
-reboot
+echo "---> Reboot all machines!
