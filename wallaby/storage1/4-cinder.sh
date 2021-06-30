@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "---> cinder on block1"
+echo "---> cinder on storage1"
 set -e
 set -x
 DEBIAN_FRONTEND=noninteractive apt-get install -y lvm2 thin-provisioning-tools tgt nvme-cli > /dev/null
@@ -41,4 +41,4 @@ crudini --set /etc/cinder/cinder.conf DEFAULT backup_driver cinder.backup.driver
 #crudini --set /etc/cinder/cinder.conf DEFAULT backup_swift_auth_url http://controller:5000/v3
 service cinder-backup restart
 set +x
-echo "---> cinder on block1 installed"
+echo "---> cinder on storage1 installed"

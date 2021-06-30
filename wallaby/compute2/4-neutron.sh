@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "---> Installing neutron on compute1"
+echo "---> Installing neutron on compute2"
 set -e
 set -x
 DEBIAN_FRONTEND=noninteractive apt-get install -y neutron-linuxbridge-agent > /dev/null
