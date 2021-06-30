@@ -29,17 +29,6 @@
 - disks:
   - disk1: 100GB (sda)
 
-## **block1** node:
-- 1 vCPU
-- 1024 MB vRAM
-- networks:
-  - Adapter 1: NAT
-  - Adapter 2: Host-only, network #2
-- disks:
-  - disk1: 10GB (sda)
-  - disk2: 60GB (sdb)
-  - disk3: 20GB (sdc)
-
 ## **compute1** node:
 - 1 vCPU
 - 1024 MB vRAM
@@ -59,28 +48,6 @@
   - Adapter 3: NAT network **provider**, Advanced -> Promiscuous Mode: Allow All
 - disks:
   - disk1: 10GB (sda)
-
-## **object1** node:
-- 1 vCPU
-- 1024 MB vRAM
-- networks:
-  - Adapter 1: NAT
-  - Adapter 2: Host-only, network #2
-- disks:
-  - disk1: 10GB (sda)
-  - disk2: 10GB (sdb)
-  - disk3: 10GB (sdc)
-
-## **object2** node:
-- 1 vCPU
-- 1024 MB vRAM
-- networks:
-  - Adapter 1: NAT
-  - Adapter 2: Host-only, network #2
-- disks:
-  - disk1: 10GB (sda)
-  - disk2: 10GB (sdb)
-  - disk3: 10GB (sdc)
 
 ## **storage1** node:
 - 1 vCPU
