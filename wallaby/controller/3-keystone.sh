@@ -32,13 +32,5 @@ set -x
 . admin-openrc
 openstack domain create --description "An Example Domain" example
 openstack project create --domain default --description "Service Project" service
-openstack project create --domain default --description "Demo Project" myproject
-openstack user create --domain default --password openstack myuser
-openstack role create myrole
-openstack role add --project myproject --user myuser myrole
-openstack project create --domain default --description "Demo Project" demo
-openstack user create --domain default --password openstack demo
-openstack role add --project demo --user demo admin
-openstack user list
 set +x
 echo "Keystone configured"
