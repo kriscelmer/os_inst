@@ -3,6 +3,7 @@
 set -x
 set -e
 
+DEBIAN_FRONTEND=noninteractive apt-get update -y > /dev/null
 for script in os_inst/wallaby/controller/[2-9]-*
 do
   bash $script
