@@ -3,6 +3,7 @@
 set -x
 set -e
 echo "---> Installing OpenStack Client"
+sudo DEBIAN_FRONTEND=noninteractive apt-get update -y > /dev/null
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y python3-openstackclient python3-heatclient > /dev/null
 cat << EOF > admin-openrc
 export OS_USERNAME=admin
