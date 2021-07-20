@@ -22,7 +22,6 @@ openstack domain create --description "Stack projects and users" heat
 openstack user create --domain heat --password openstack heat_domain_admin
 openstack role add --domain heat --user-domain heat --user heat_domain_admin admin
 openstack role create heat_stack_owner
-openstack role add --project demo --user demo heat_stack_owner
 openstack role create heat_stack_user
 DEBIAN_FRONTEND=noninteractive apt-get install -y heat-api heat-api-cfn heat-engine python3-vitrageclient python3-zunclient > /dev/null
 crudini --set /etc/heat/heat.conf database connection 'mysql+pymysql://heat:openstack@controller/heat'
