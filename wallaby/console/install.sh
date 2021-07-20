@@ -33,3 +33,7 @@ ssh openstack@controller sudo bash os_inst/wallaby/controller/register-computes.
 # Prepare 'demo' account to course exercises
 . demo-openrc
 openstack keypair create --public-key /home/openstack/.ssh/id_rsa.pub demo-key
+openstack security group create demo-sg --description "Allow ICMP and SSH from any address"
+openstack security group rule create --remote-group demo-sg --ingress --ethertype IPv4 demo-sg
+openstack security group rule create --remote-ip 0.0.0.0/0 --protocol icmp --ingress --ethertype IPv4 demo-sg
+openstack security group rule create --remote-ip 0.0.0.0/0 --protocol tcp --dst-port 22 --ingress --ethertype IPv4 demo-sg
