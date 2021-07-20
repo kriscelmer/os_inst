@@ -17,6 +17,7 @@ openstack volume type set lvm2 --property volume_backend_name=LVM-2
 openstack project create --domain default --description "Demo Project" demo
 openstack user create --domain default --password openstack demo
 openstack role add --project demo --user demo member
+openstack role add --project demo --user demo heat_stack_owner
 # Demo project configuration
 . demo-openrc
 openstack network create demo-network
