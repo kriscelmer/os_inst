@@ -25,9 +25,8 @@ openstack role add --project demo --user demo heat_stack_owner
 # openstack router create demo-router
 # openstack router set demo-router --external-gateway external-network
 # openstack router add subnet demo-router demo-network
-# openstack security group create demo-sg --description "Allow ICMP and SSH from any address"
-# openstack security group rule create --remote-group demo-sg --ingress --ethertype IPv4 demo-sg
-# openstack security group rule create --remote-ip 0.0.0.0/0 --protocol icmp --ingress --ethertype IPv4 demo-sg
-# openstack security group rule create --remote-ip 0.0.0.0/0 --protocol tcp --dst-port 22 --ingress --ethertype IPv4 demo-sg
+# openstack security group create demo-icmp-sg --description "Allow ICMP and SSH from any address"
+# openstack security group rule create --remote-group demo-icmp-sg --ingress --ethertype IPv4 demo-icmp-sg
+# openstack security group rule create --remote-ip 0.0.0.0/0 --protocol icmp --ingress --ethertype IPv4 demo-icmp-sg
 # openstack keypair create --public-key /home/openstack/.ssh/id_rsa.pub demo-key
 echo "---> OpenStack configured"
