@@ -36,3 +36,8 @@ openstack keypair create --public-key /home/openstack/.ssh/id_rsa.pub demo-keypa
 openstack security group create demo-icmp-sg --description "Allow ICMP packets from any address"
 openstack security group rule create --remote-group demo-icmp-sg --ingress --ethertype IPv4 demo-icmp-sg
 openstack security group rule create --remote-ip 0.0.0.0/0 --protocol icmp --ingress --ethertype IPv4 demo-icmp-sg
+
+# Copy example files to /home/openstack/examples
+mkdir -p /home/openstack/examples
+cp -r os_inst/wallaby/console/examples/* /home/openstack/examples
+chown -R openstack /home/openstack/examples
