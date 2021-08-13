@@ -3,7 +3,9 @@
 mkdir /home/cirros/web
 echo "while true ; do nc -l -p 80 < /home/cirros/web/index.html ; done" > /home/cirros/web/webserver
 chmod 755 /home/cirros/web/webserver
-echo "Hello world!" > /home/cirros/web/index.html
+
+HOST=`hostname`
+echo "Hello world!  webserver @ $HOST" > /home/cirros/web/index.html
 
 cat << EOF > /etc/rc.local
 #!/bin/sh
