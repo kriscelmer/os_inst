@@ -5,7 +5,7 @@ echo "while true ; do nc -l -p 80 < /home/cirros/web/index.html ; done" > /home/
 chmod 755 /home/cirros/web/webserver
 
 HOST=`hostname`
-echo "Hello world!  webserver @ $HOST" > /home/cirros/web/index.html
+echo "<h1>Hello world!</h1><i>webserver @ $HOST</i>" > /home/cirros/web/index.html
 
 cat << EOF > /etc/rc.local
 #!/bin/sh
