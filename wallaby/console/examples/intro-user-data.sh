@@ -1,11 +1,14 @@
 #!/bin/sh
 
 mkdir /home/cirros/web
-echo "while true ; do nc -l -p 80 < /home/cirros/web/index.html ; done" > /home/cirros/web/webserver
-chmod 755 /home/cirros/web/webserver
+cat << EOF > /home/cirros/web/webserver
+while true
+do
+  echo "<h1>Hello world!</h1><p><i> webserver @ \`hostname\`</i>" | nc -l -p 80
+done
+EOF
 
-HOST=`hostname`
-echo "<h1>Hello world!</h1><i>webserver @ $HOST</i>" > /home/cirros/web/index.html
+chmod 755 /home/cirros/web/webserver
 
 cat << EOF > /etc/rc.local
 #!/bin/sh
