@@ -9,8 +9,8 @@ openstack service create --name swift --description "OpenStack Object Storage" o
 openstack endpoint create --region RegionOne object-store public 'http://controller:8080/v1/AUTH_%(tenant_id)s'
 openstack endpoint create --region RegionOne object-store internal 'http://controller:8080/v1/AUTH_%(tenant_id)s'
 openstack endpoint create --region RegionOne object-store admin 'http://controller:8080/v1'
-DEBIAN_FRONTEND=noninteractive apt-get install -y swift swift-proxy > /dev/null
-curl -o /etc/swift/proxy-server.conf https://opendev.org/openstack/swift/raw/branch/stable/wallaby/etc/proxy-server.conf-sample
+DEBIAN_FRONTEND=noninteractive apt-get install -y swift swift-proxy python-swiftclient python-keystoneclient python-keystonemiddleware > /dev/null
+curl -o /etc/swift/proxy-server.conf https://opendev.org/openstack/swift/raw/branch/stable/xena/etc/proxy-server.conf-sample
 crudini --set /etc/swift/proxy-server.conf DEFAULT bind_port 8080
 crudini --set /etc/swift/proxy-server.conf DEFAULT user swift
 crudini --set /etc/swift/proxy-server.conf DEFAULT swift_dir /etc/swift
@@ -36,24 +36,18 @@ crudini --set /etc/swift/proxy-server.conf filter:cache use 'egg:swift#memcache'
 crudini --set /etc/swift/proxy-server.conf filter:cache memcache_servers controller:11211
 cd /etc/swift
 swift-ring-builder account.builder create 10 3 1
-swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6202 --device sdb2 --weight 100
-swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6202 --device sdb3 --weight 100
-swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6202 --device sdb2 --weight 100
-swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6202 --device sdb3 --weight 100
+swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6202 --device sdb3 --weight 100
+swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6202 --device sdb4 --weight 100
 swift-ring-builder account.builder rebalance
 swift-ring-builder container.builder create 10 3 1
-swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6201 --device sdb2 --weight 100
-swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6201 --device sdb3 --weight 100
-swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6201 --device sdb2 --weight 100
-swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6201 --device sdb3 --weight 100
+swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6201 --device sdb3 --weight 100
+swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6201 --device sdb4 --weight 100
 swift-ring-builder container.builder rebalance
 swift-ring-builder object.builder create 10 3 1
-swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6200 --device sdb2 --weight 100
-swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 6200 --device sdb3 --weight 100
-swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6200 --device sdb2 --weight 100
-swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6200 --device sdb3 --weight 100
+swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6200 --device sdb3 --weight 100
+swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6200 --device sdb4 --weight 100
 swift-ring-builder object.builder rebalance
-curl -o /etc/swift/swift.conf https://opendev.org/openstack/swift/raw/branch/stable/wallaby/etc/swift.conf-sample
+curl -o /etc/swift/swift.conf https://opendev.org/openstack/swift/raw/branch/stable/xena/etc/swift.conf-sample
 crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_suffix open
 crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_prefix stack
 crudini --set /etc/swift/swift.conf storage-policy:0 name Policy-0
@@ -63,4 +57,4 @@ service memcached restart
 service swift-proxy restart
 
 set +x
-echo "---> Swift installed on controller"
+echo "---> Swift Storage node part installed on controller"
