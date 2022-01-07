@@ -19,6 +19,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y swift-account swift-container 
 curl -o /etc/swift/account-server.conf https://opendev.org/openstack/swift/raw/branch/master/etc/account-server.conf-sample
 curl -o /etc/swift/container-server.conf https://opendev.org/openstack/swift/raw/branch/master/etc/container-server.conf-sample
 curl -o /etc/swift/object-server.conf https://opendev.org/openstack/swift/raw/branch/master/etc/object-server.conf-sample
+curl -o /etc/swift/internal-client.conf https://opendev.org/openstack/swift/raw/branch/master/etc/internal-client.conf-sample
 crudini --set /etc/swift/account-server.conf DEFAULT bind_ip 10.0.0.11
 crudini --set /etc/swift/account-server.conf DEFAULT bind_port 6202
 crudini --set /etc/swift/account-server.conf DEFAULT user swift
