@@ -35,15 +35,15 @@ crudini --set /etc/swift/proxy-server.conf filter:authtoken include_service_cata
 crudini --set /etc/swift/proxy-server.conf filter:cache use 'egg:swift#memcache'
 crudini --set /etc/swift/proxy-server.conf filter:cache memcache_servers controller:11211
 cd /etc/swift
-swift-ring-builder account.builder create 10 3 1
+swift-ring-builder account.builder create 10 2 1
 swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6202 --device sdb3 --weight 100
 swift-ring-builder account.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6202 --device sdb4 --weight 100
 swift-ring-builder account.builder rebalance
-swift-ring-builder container.builder create 10 3 1
+swift-ring-builder container.builder create 10 2 1
 swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6201 --device sdb3 --weight 100
 swift-ring-builder container.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6201 --device sdb4 --weight 100
 swift-ring-builder container.builder rebalance
-swift-ring-builder object.builder create 10 3 1
+swift-ring-builder object.builder create 10 2 1
 swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6200 --device sdb3 --weight 100
 swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.11 --port 6200 --device sdb4 --weight 100
 swift-ring-builder object.builder rebalance
