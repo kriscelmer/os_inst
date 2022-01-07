@@ -28,14 +28,14 @@ do
   echo "---> reloding os_inst repo on $node"
   ssh openstack@$node rm -rf os_inst
   ssh openstack@$node git clone https://github.com/kriscelmer/os_inst
-  ssh openstack@$node sudo bash os_inst/wallaby/$node/install.sh
+  ssh openstack@$node sudo bash os_inst/xena/$node/install.sh
 done
-#ssh openstack@controller sudo bash os_inst/wallaby/controller/install.sh
-#ssh openstack@storage1 sudo bash os_inst/wallaby/storage1/install.sh
-#ssh openstack@storage2 sudo bash os_inst/wallaby/storage2/install.sh
-#ssh openstack@compute1 sudo bash os_inst/wallaby/compute1/install.sh
-#ssh openstack@compute2 sudo bash os_inst/wallaby/compute2/install.sh
-ssh openstack@controller sudo bash os_inst/wallaby/controller/register-computes.sh
+#ssh openstack@controller sudo bash os_inst/xena/controller/install.sh
+#ssh openstack@storage1 sudo bash os_inst/xena/storage1/install.sh
+#ssh openstack@storage2 sudo bash os_inst/xena/storage2/install.sh
+#ssh openstack@compute1 sudo bash os_inst/xena/compute1/install.sh
+#ssh openstack@compute2 sudo bash os_inst/xena/compute2/install.sh
+ssh openstack@controller sudo bash os_inst/xena/controller/register-computes.sh
 
 # Prepare 'demo' account to course exercises
 . demo-openrc
@@ -46,5 +46,5 @@ openstack security group rule create --remote-ip 0.0.0.0/0 --protocol icmp --ing
 
 # Copy example files to /home/openstack/examples
 mkdir -p /home/openstack/examples
-cp -r os_inst/wallaby/console/examples/* /home/openstack/examples
+cp -r os_inst/xena/console/examples/* /home/openstack/examples
 chown -R openstack /home/openstack/examples
