@@ -10,7 +10,7 @@ pvcreate /dev/sdb2
 vgcreate cinder-volumes2 /dev/sdb2
 sed -i '/^devices/a \ \ \ \ \ \ \ \ filter = \[ \"a\/sdb\/"\, \"r\/\.\*\/\"\]' /etc/lvm/lvm.conf
 DEBIAN_FRONTEND=noninteractive apt-get install -y cinder-volume > /dev/null
-crudini --set /etc/cinder/cinder.conf DEFAULT enabled_backends lvm1, lvm2
+crudini --set /etc/cinder/cinder.conf DEFAULT enabled_backends lvm1,lvm2
 crudini --set /etc/cinder/cinder.conf DEFAULT glance_api_servers http://controller:9292
 crudini --set /etc/cinder/cinder.conf DEFAULT lock_path /var/lib/cinder/tmp
 #crudini --set /etc/cinder/cinder.conf DEFAULT default_volume_type lvm
