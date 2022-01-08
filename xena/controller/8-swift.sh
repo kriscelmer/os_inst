@@ -9,7 +9,7 @@ openstack service create --name swift --description "OpenStack Object Storage" o
 openstack endpoint create --region RegionOne object-store public 'http://controller:8080/v1/AUTH_%(tenant_id)s'
 openstack endpoint create --region RegionOne object-store internal 'http://controller:8080/v1/AUTH_%(tenant_id)s'
 openstack endpoint create --region RegionOne object-store admin 'http://controller:8080/v1'
-DEBIAN_FRONTEND=noninteractive apt-get install -y swift swift-proxy > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y swift swift-proxy python3-swiftclient python3-keystoneclient python3-keystonemiddleware > /dev/null
 curl -o /etc/swift/proxy-server.conf https://opendev.org/openstack/swift/raw/branch/stable/xena/etc/proxy-server.conf-sample
 crudini --set /etc/swift/proxy-server.conf DEFAULT bind_port 8080
 crudini --set /etc/swift/proxy-server.conf DEFAULT user swift
