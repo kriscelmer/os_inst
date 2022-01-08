@@ -15,3 +15,4 @@ do
   bash $script
 done
 bash os_inst/xena/controller/configure-openstack.sh
+bash os_inst/xena/controller/register-computes.sh
