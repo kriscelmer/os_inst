@@ -12,9 +12,9 @@ EOF
 openstack user create --domain default --password openstack placement
 openstack role add --project service --user placement admin
 openstack service create --name placement --description "Placement API" placement
-openstack endpoint create --region RegionOne placement public http://controller:8778
-openstack endpoint create --region RegionOne placement internal http://controller:8778
-openstack endpoint create --region RegionOne placement admin http://controller:8778
+openstack endpoint create --region RegionOne placement public http://10.0.0.11:8778
+openstack endpoint create --region RegionOne placement internal http://10.0.0.11:8778
+openstack endpoint create --region RegionOne placement admin http://10.0.0.11:8778
 DEBIAN_FRONTEND=noninteractive apt-get install -y placement-api python3-osc-placement> /dev/null
 crudini --set /etc/placement/placement.conf placement_database connection 'mysql+pymysql://placement:openstack@controller/placement'
 crudini --set /etc/placement/placement.conf api auth_strategy keystone

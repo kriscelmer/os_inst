@@ -13,7 +13,7 @@ crudini --set /etc/keystone/keystone.conf token provider fernet
 su -s /bin/sh -c "keystone-manage db_sync" keystone
 keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
 keystone-manage credential_setup --keystone-user keystone --keystone-group keystone
-keystone-manage bootstrap --bootstrap-password openstack --bootstrap-admin-url http://controller:5000/v3/ --bootstrap-internal-url http://controller:5000/v3/ --bootstrap-public-url http://controller:5000/v3/ --bootstrap-region-id RegionOne
+keystone-manage bootstrap --bootstrap-password openstack --bootstrap-admin-url http://10.0.0.11:5000/v3/ --bootstrap-internal-url http://10.0.0.11:5000/v3/ --bootstrap-public-url http://10.0.0.11:5000/v3/ --bootstrap-region-id RegionOne
 echo "ServerName controller" >> /etc/apache2/apache2.conf
 service apache2 restart
 cat << EOF > admin-openrc

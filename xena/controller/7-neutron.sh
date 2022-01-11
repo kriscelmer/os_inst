@@ -12,9 +12,9 @@ EOF
 openstack user create --domain default --password openstack neutron
 openstack role add --project service --user neutron admin
 openstack service create --name neutron --description "OpenStack Networking" network
-openstack endpoint create --region RegionOne network public http://controller:9696
-openstack endpoint create --region RegionOne network internal http://controller:9696
-openstack endpoint create --region RegionOne network admin http://controller:9696
+openstack endpoint create --region RegionOne network public http://10.0.0.11:9696
+openstack endpoint create --region RegionOne network internal http://10.0.0.11:9696
+openstack endpoint create --region RegionOne network admin http://10.0.0.11:9696
 DEBIAN_FRONTEND=noninteractive apt-get install -y neutron-server neutron-plugin-ml2 neutron-linuxbridge-agent neutron-l3-agent neutron-dhcp-agent neutron-metadata-agent > /dev/null
 crudini --set /etc/neutron/neutron.conf database connection 'mysql+pymysql://neutron:openstack@controller/neutron'
 crudini --set /etc/neutron/neutron.conf DEFAULT core_plugin ml2

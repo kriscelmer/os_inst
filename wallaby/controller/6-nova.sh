@@ -18,9 +18,9 @@ EOF
 openstack user create --domain default --password openstack nova
 openstack role add --project service --user nova admin
 openstack service create --name nova --description "OpenStack Compute" compute
-openstack endpoint create --region RegionOne compute public http://controller:8774/v2.1
-openstack endpoint create --region RegionOne compute internal http://controller:8774/v2.1
-openstack endpoint create --region RegionOne compute admin http://controller:8774/v2.1
+openstack endpoint create --region RegionOne compute public http://10.0.0.11:8774/v2.1
+openstack endpoint create --region RegionOne compute internal http://10.0.0.11:8774/v2.1
+openstack endpoint create --region RegionOne compute admin http://10.0.0.11:8774/v2.1
 DEBIAN_FRONTEND=noninteractive apt-get install -y nova-api nova-conductor nova-novncproxy nova-scheduler > /dev/null
 crudini --set /etc/nova/nova.conf api_database connection 'mysql+pymysql://nova:openstack@controller/nova_api'
 crudini --set /etc/nova/nova.conf database connection 'mysql+pymysql://nova:openstack@controller/nova'

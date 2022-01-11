@@ -6,9 +6,9 @@ set -x
 openstack user create --domain default --password openstack swift
 openstack role add --project service --user swift admin
 openstack service create --name swift --description "OpenStack Object Storage" object-store
-openstack endpoint create --region RegionOne object-store public 'http://controller:8080/v1/AUTH_%(tenant_id)s'
-openstack endpoint create --region RegionOne object-store internal 'http://controller:8080/v1/AUTH_%(tenant_id)s'
-openstack endpoint create --region RegionOne object-store admin 'http://controller:8080/v1'
+openstack endpoint create --region RegionOne object-store public 'http://10.0.0.11:8080/v1/AUTH_%(tenant_id)s'
+openstack endpoint create --region RegionOne object-store internal 'http://10.0.0.11:8080/v1/AUTH_%(tenant_id)s'
+openstack endpoint create --region RegionOne object-store admin 'http://10.0.0.11:8080/v1'
 DEBIAN_FRONTEND=noninteractive apt-get install -y swift swift-proxy python3-swiftclient python3-keystoneclient python3-keystonemiddleware > /dev/null
 curl -o /etc/swift/proxy-server.conf https://opendev.org/openstack/swift/raw/branch/stable/xena/etc/proxy-server.conf-sample
 crudini --set /etc/swift/proxy-server.conf DEFAULT bind_port 8080
