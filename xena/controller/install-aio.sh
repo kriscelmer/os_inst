@@ -28,6 +28,7 @@ export OS_AUTH_URL=http://controller:5000/v3
 export OS_IDENTITY_API_VERSION=3
 EOF
 . demo-openrc
+ssh-keygen -t rsa -b 1024 -q -N ""
 openstack keypair create --public-key /home/openstack/.ssh/id_rsa.pub demo-keypair
 openstack security group create demo-icmp-sg --description "Allow ICMP packets from any address"
 openstack security group rule create --remote-group demo-icmp-sg --ingress --ethertype IPv4 demo-icmp-sg
