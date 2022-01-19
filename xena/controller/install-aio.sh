@@ -43,4 +43,4 @@ chown -R openstack /home/openstack/examples
 mkdir -p /home/openstack/.config/openstack
 cp os_inst/xena/controller/clouds.yaml /home/openstack/.config/openstack
 chown openstack /home/openstack/.config
-chown -R /home/openstack/.config/openstack
+chown -R openstack /home/openstack/.config/openstack
