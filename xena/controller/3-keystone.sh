@@ -30,7 +30,7 @@ echo "---> Keystone installed"
 echo "---> Configuring domains, users and projects"
 set -x
 . admin-openrc
-openstack domain create --description "An Example Domain" example
+# openstack domain create --description "An Example Domain" example
 openstack project create --domain default --description "Service Project" service
 set +x
 echo "Keystone configured"
