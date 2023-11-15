@@ -36,6 +36,15 @@ crudini --set /etc/nova/nova.conf keystone_authtoken user_domain_name Default
 crudini --set /etc/nova/nova.conf keystone_authtoken project_name service
 crudini --set /etc/nova/nova.conf keystone_authtoken username nova
 crudini --set /etc/nova/nova.conf keystone_authtoken password openstack
+crudini --set /etc/nova/nova.conf service_user send_service_user_token true
+crudini --set /etc/nova/nova.conf service_user auth_url https://controller/identity
+crudini --set /etc/nova/nova.conf service_user auth_strategy keystone
+crudini --set /etc/nova/nova.conf service_user auth_type password
+crudini --set /etc/nova/nova.conf service_user project_domain_name Default
+crudini --set /etc/nova/nova.conf service_user project_name service
+crudini --set /etc/nova/nova.conf service_user user_domain_name Default
+crudini --set /etc/nova/nova.conf service_user username nova
+crudini --set /etc/nova/nova.conf service_user password openstack
 crudini --set /etc/nova/nova.conf DEFAULT my_ip 10.0.0.11
 crudini --set /etc/nova/nova.conf vnc enabled true
 crudini --set /etc/nova/nova.conf vnc server_listen '$my_ip'
