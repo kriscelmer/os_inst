@@ -1,0 +1,144 @@
+heat_template_version: 2021-04-16
+
+description: >
+  OpenStack Orchestration service template that creates:
+  
+  - a private network
+  
+  - a router connecting a private network to external network
+  
+  - an instance attached to a private network
+  
+  - a data volume attached to an instance
+  
+
+parameters:
+
+  instance_name:
+    label: Instance Name
+    type: string
+    description: Name of the new instance
+
+  keypair_name:
+    label: Key pair for SSH
+    type: string
+    description: Name of an existing key pair for the instance
+    default: demo-keypair
+    constraints:
+      - custom_constraint: nova.keypair
+
+  instance_flavor:
+    label: Instance Flavor
+    type: string
+    description: Flavor for the instance
+    default: m1.nano
+    constraints:
+      - custom_constraint: nova.flavor
+
+  instance_image:
+    label: Instance Image
+    type: string
+    description: Name of the image for the instance
+    constraints:
+      - custom_constraint: glance.image
+
+  network_name:
+    label: Private Network Name
+    type: string
+    description: Name of the new network
+    default: demo-network
+
+  subnet_name:
+    label: Private Network's Subnet Name
+    type: string
+    description: Name of the new subnet
+    default: demo-subnet
+
+  external_network:
+    label: External Network Name
+    type: string
+    description: Name of the external network for router
+    constraints:
+      - custom_constraint: neutron.network
+
+  subnet_cidr:
+    label: Private Network's Subnet CIDR
+    type: string
+    description: CIDR for the new subnet
+    default: "172.16.0.0/24"
+
+  volume_name:
+    label: Volume Name
+    type: string
+    description: Name of the new volume
+    default: demo-volume-1
+
+  volume_size:
+    label: Volume Size (in GB)
+    type: number
+    description: The size of the new volume
+    default: 1
+
+resources:
+  demo_network:
+    type: OS::Neutron::Net
+    properties:
+      name: { get_param: network_name }
+
+  demo_subnet:
+    type: OS::Neutron::Subnet
+    properties:
+      name: { get_param: subnet_name }
+      network_id: { get_resource: demo_network }
+      cidr: { get_param: subnet_cidr }
+      dns_nameservers: [ 8.8.4.4, 8.8.8.8 ]
+
+  demo_router:
+    type: OS::Neutron::Router
+    properties:
+      external_gateway_info:
+        network: { get_param: external_network }
+
+  demo_router_interface:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: demo_router }
+      subnet: { get_resource: demo_subnet }
+
+  demo_server:
+    type: OS::Nova::Server
+    properties:
+      name: { get_param: instance_name }
+      key_name: { get_param: keypair_name }
+      image: { get_param: instance_image }
+      flavor: { get_param: instance_flavor }
+      networks: [{network: { get_resource: demo_network } }]
+      user_data: >
+        #!/bin/sh
+
+        cat << EOF >> /home/cirros/.profile
+
+        PS1="\u@\h:\w $ "
+
+        EOF
+        
+        
+      user_data_format: "RAW"
+
+  demo_volume:
+    type: OS::Cinder::Volume
+    properties:
+      name: { get_param: volume_name }	
+      size: { get_param: volume_size }
+
+  volume_attachment:
+    type: OS::Cinder::VolumeAttachment
+    properties:
+      instance_uuid: { get_resource: demo_server }
+      volume_id: {get_resource: demo_volume }
+      mountpoint: /dev/vdb
+
+outputs:
+  instance_networks:
+    description: The IP address of new instance
+    value: { get_attr: [demo_server, networks] }
