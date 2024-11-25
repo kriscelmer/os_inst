@@ -9,7 +9,7 @@ echo "allow 10.0.0.0/24" >> /etc/chrony/chrony.conf
 service chrony restart
 DEBIAN_FRONTEND=noninteractive add-apt-repository -y cloud-archive:dalmatian > /dev/null
 DEBIAN_FRONTEND=noninteractive apt-get install -y python3-openstackclient > /dev/null
-DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server python3-pymysql > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client-core python3-pymysql > /dev/null
 cat << EOF >  /etc/mysql/mariadb.conf.d/99-openstack.cnf
 [mysqld]
 bind-address = 10.0.0.11
