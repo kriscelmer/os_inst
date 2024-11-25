@@ -10,7 +10,7 @@ openstack endpoint create --region RegionOne object-store public 'http://10.0.0.
 openstack endpoint create --region RegionOne object-store internal 'http://10.0.0.11:8080/v1/AUTH_%(tenant_id)s'
 openstack endpoint create --region RegionOne object-store admin 'http://10.0.0.11:8080/v1'
 DEBIAN_FRONTEND=noninteractive apt-get install -y swift swift-proxy python3-swiftclient  python3-keystoneclient python3-keystonemiddleware > /dev/null
-curl -o /etc/swift/proxy-server.conf https://opendev.org/openstack/swift/raw/branch/stable/dalmatian/etc/proxy-server.conf-sample
+curl -o /etc/swift/proxy-server.conf https://opendev.org/openstack/swift/raw/branch/stable/caracal/etc/proxy-server.conf-sample
 crudini --set /etc/swift/proxy-server.conf DEFAULT bind_port 8080
 crudini --set /etc/swift/proxy-server.conf DEFAULT user swift
 crudini --set /etc/swift/proxy-server.conf DEFAULT swift_dir /etc/swift
@@ -53,7 +53,7 @@ swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 
 swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6200 --device sdb2 --weight 100
 swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6200 --device sdb3 --weight 100
 swift-ring-builder object.builder rebalance
-curl -o /etc/swift/swift.conf https://opendev.org/openstack/swift/raw/branch/stable/dalmatian/etc/swift.conf-sample
+curl -o /etc/swift/swift.conf https://opendev.org/openstack/swift/raw/branch/stable/caracal/etc/swift.conf-sample
 crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_suffix open
 crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_prefix stack
 crudini --set /etc/swift/swift.conf storage-policy:0 name Policy-0
