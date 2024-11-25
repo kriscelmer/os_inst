@@ -28,14 +28,14 @@ do
   echo "---> reloding os_inst repo on $node"
   ssh openstack@$node rm -rf os_inst
   ssh openstack@$node git clone https://github.com/kriscelmer/os_inst
-  ssh openstack@$node sudo bash os_inst/antelope/$node/install.sh
+  ssh openstack@$node sudo bash os_inst/dalmatian/$node/install.sh
 done
-#ssh openstack@controller sudo bash os_inst/antelope/controller/install.sh
-#ssh openstack@storage1 sudo bash os_inst/antelope/storage1/install.sh
-#ssh openstack@storage2 sudo bash os_inst/antelope/storage2/install.sh
-#ssh openstack@compute1 sudo bash os_inst/antelope/compute1/install.sh
-#ssh openstack@compute2 sudo bash os_inst/antelope/compute2/install.sh
-ssh openstack@controller sudo bash os_inst/antelope/controller/register-computes.sh
+#ssh openstack@controller sudo bash os_inst/dalmatian/controller/install.sh
+#ssh openstack@storage1 sudo bash os_inst/dalmatian/storage1/install.sh
+#ssh openstack@storage2 sudo bash os_inst/dalmatian/storage2/install.sh
+#ssh openstack@compute1 sudo bash os_inst/dalmatian/compute1/install.sh
+#ssh openstack@compute2 sudo bash os_inst/dalmatian/compute2/install.sh
+ssh openstack@controller sudo bash os_inst/dalmatian/controller/register-computes.sh
 
 # Prepare 'demo' account to course exercises
 . demo-openrc
@@ -46,5 +46,5 @@ openstack security group rule create --remote-ip 0.0.0.0/0 --protocol icmp --ing
 
 # Copy example files to /home/openstack/examples
 mkdir -p /home/openstack/examples
-cp -r os_inst/antelope/console/examples/* /home/openstack/examples
+cp -r os_inst/dalmatian/console/examples/* /home/openstack/examples
 chown -R openstack /home/openstack/examples

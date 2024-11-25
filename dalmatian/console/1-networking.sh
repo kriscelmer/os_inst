@@ -4,7 +4,7 @@ echo "---> Configuring Networking for OpenStack"
 set -e
 set -x
 echo "openstack" | sudo -S sh -c "echo 'openstack ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
-sudo cp os_inst/antelope/hosts /etc/hosts
+sudo cp os_inst/dalmatian/hosts /etc/hosts
 ssh-keygen -t rsa -b 1024 -q -N ""
 ssh-copy-id openstack@controller
 ssh-copy-id openstack@compute1
@@ -13,29 +13,29 @@ ssh-copy-id openstack@storage1
 ssh-copy-id openstack@storage2
 echo "---> Configuring networking on controller..."
 ssh openstack@controller git clone https://github.com/kriscelmer/os_inst
-echo "openstack" | ssh openstack@controller sudo -S bash /home/openstack/os_inst/antelope/controller/1-networking.sh
+echo "openstack" | ssh openstack@controller sudo -S bash /home/openstack/os_inst/dalmatian/controller/1-networking.sh
 ssh openstack@controller sudo "shutdown -r +1"
 echo "---> Configuring networking on compute1..."
 ssh openstack@compute1 git clone https://github.com/kriscelmer/os_inst
-echo "openstack" | ssh openstack@compute1 sudo -S bash /home/openstack/os_inst/antelope/compute1/1-networking.sh
+echo "openstack" | ssh openstack@compute1 sudo -S bash /home/openstack/os_inst/dalmatian/compute1/1-networking.sh
 ssh openstack@compute1 sudo "shutdown -r +1"
 echo "---> Configuring networking on compute2..."
 ssh openstack@compute2 git clone https://github.com/kriscelmer/os_inst
-echo "openstack" | ssh openstack@compute2 sudo -S bash /home/openstack/os_inst/antelope/compute2/1-networking.sh
+echo "openstack" | ssh openstack@compute2 sudo -S bash /home/openstack/os_inst/dalmatian/compute2/1-networking.sh
 ssh openstack@compute2 sudo "shutdown -r +1"
 echo "---> Configuring networking on storage1..."
 ssh openstack@storage1 git clone https://github.com/kriscelmer/os_inst
-echo "openstack" | ssh openstack@storage1 sudo -S bash /home/openstack/os_inst/antelope/storage1/1-networking.sh
+echo "openstack" | ssh openstack@storage1 sudo -S bash /home/openstack/os_inst/dalmatian/storage1/1-networking.sh
 ssh openstack@storage1 sudo "shutdown -r +1"
 echo "---> Configuring networking on storage2..."
 ssh openstack@storage2 git clone https://github.com/kriscelmer/os_inst
-echo "openstack" | ssh openstack@storage2 sudo -S bash /home/openstack/os_inst/antelope/storage2/1-networking.sh
+echo "openstack" | ssh openstack@storage2 sudo -S bash /home/openstack/os_inst/dalmatian/storage2/1-networking.sh
 ssh openstack@storage2 sudo "shutdown -r +1"
 echo "---> Configuring networking on console..."
 sudo DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade > /dev/null
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install ifupdown > /dev/null
-sudo cp os_inst/antelope/console/interfaces /etc/network/interfaces
+sudo cp os_inst/dalmatian/console/interfaces /etc/network/interfaces
 sudo sh -c "ifdown --force enp0s3 enp0s8 enp0s9 lo && ifup -a"
 sudo systemctl unmask networking
 sudo systemctl enable networking

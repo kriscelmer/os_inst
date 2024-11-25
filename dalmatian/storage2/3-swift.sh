@@ -97,12 +97,12 @@ swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.41 --port 
 swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6200 --device sdb2 --weight 100
 swift-ring-builder object.builder add --region 1 --zone 1 --ip 10.0.0.42 --port 6200 --device sdb3 --weight 100
 swift-ring-builder object.builder rebalance
-curl -o /etc/swift/swift.conf https://opendev.org/openstack/swift/raw/branch/stable/antelope/etc/swift.conf-sample
+curl -o /etc/swift/swift.conf https://opendev.org/openstack/swift/raw/branch/stable/dalmatian/etc/swift.conf-sample
 crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_suffix open
 crudini --set /etc/swift/swift.conf swift-hash swift_hash_path_prefix stack
 crudini --set /etc/swift/swift.conf storage-policy:0 name Policy-0
 crudini --set /etc/swift/swift.conf storage-policy:0 default yes
-curl -o /etc/swift/internal-client.conf https://opendev.org/openstack/swift/raw/branch/stable/antelope/etc/internal-client.conf-sample
+curl -o /etc/swift/internal-client.conf https://opendev.org/openstack/swift/raw/branch/stable/dalmatian/etc/internal-client.conf-sample
 chown -R root:swift /etc/swift
 
 swift-init all start
