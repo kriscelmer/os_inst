@@ -68,7 +68,7 @@ service nova-api restart
 service nova-scheduler restart
 service nova-conductor restart
 service nova-novncproxy restart
-sleep 5
+sleep 15
 openstack compute service list
 openstack catalog list
 openstack image list
