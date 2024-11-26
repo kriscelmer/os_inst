@@ -4,7 +4,7 @@ echo "---> Configuring Networking for OpenStack"
 set -e
 set -x
 DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null
-DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get -y upgrade > /dev/null
 echo "openstack ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 DEBIAN_FRONTEND=noninteractive apt-get -y install ifupdown > /dev/null
 cp os_inst/caracal/compute2/interfaces /etc/network/interfaces
@@ -19,5 +19,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --assume-yes purge nplan netplan.io > 
 echo "DNS=8.8.8.8 8.8.4.4" >> /etc/systemd/resolved.conf
 systemctl restart systemd-resolved
 cp os_inst/caracal/hosts /etc/hosts
+systemctl disable --now unattended-upgrades
+DEBIAN_FRONTEND=noninteractive apt-get -y remove unattended-upgrades
 set +x
 echo "---> Networking configured"

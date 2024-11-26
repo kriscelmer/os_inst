@@ -15,7 +15,7 @@ openstack service create --name placement --description "Placement API" placemen
 openstack endpoint create --region RegionOne placement public http://10.0.0.11:8778
 openstack endpoint create --region RegionOne placement internal http://10.0.0.11:8778
 openstack endpoint create --region RegionOne placement admin http://10.0.0.11:8778
-DEBIAN_FRONTEND=noninteractive apt-get install -y placement-api python3-osc-placement> /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y placement-api > /dev/null
 crudini --set /etc/placement/placement.conf placement_database connection 'mysql+pymysql://placement:openstack@controller/placement'
 crudini --set /etc/placement/placement.conf api auth_strategy keystone
 crudini --set /etc/placement/placement.conf keystone_authtoken auth_url http://controller:5000/v3

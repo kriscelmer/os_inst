@@ -19,5 +19,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --assume-yes purge nplan netplan.io > 
 echo "DNS=8.8.8.8 8.8.4.4" >> /etc/systemd/resolved.conf
 systemctl restart systemd-resolved
 cp os_inst/caracal/hosts /etc/hosts
+systemctl disable --now unattended-upgrades
+DEBIAN_FRONTEND=noninteractive apt-get -y remove unattended-upgrades
 set +x
 echo "---> Networking configured"
