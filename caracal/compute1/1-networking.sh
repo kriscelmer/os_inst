@@ -4,7 +4,7 @@ echo "---> Configuring Networking for OpenStack"
 set -e
 set -x
 DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null
-DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get -y upgrade > /dev/null
 echo "openstack ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 DEBIAN_FRONTEND=noninteractive apt-get -y install ifupdown > /dev/null
 cp os_inst/caracal/compute1/interfaces /etc/network/interfaces
