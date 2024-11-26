@@ -27,9 +27,9 @@ crudini --set  /etc/glance/glance-api.conf keystone_authtoken project_name servi
 crudini --set  /etc/glance/glance-api.conf keystone_authtoken username glance
 crudini --set  /etc/glance/glance-api.conf keystone_authtoken password openstack
 crudini --set  /etc/glance/glance-api.conf paste_deploy flavor keystone
-crudini --set  /etc/glance/glance-api.conf glance_store stores 'file,http'
-crudini --set  /etc/glance/glance-api.conf glance_store default_store file
-crudini --set  /etc/glance/glance-api.conf glance_store filesystem_store_datadir /var/lib/glance/images/
+crudini --set  /etc/glance/glance-api.conf DEFAULT enabled_backends 'fs:file'
+crudini --set  /etc/glance/glance-api.conf glance_store default_backend fs
+crudini --set  /etc/glance/glance-api.conf fs filesystem_store_datadir /var/lib/glance/images/
 su -s /bin/sh -c "glance-manage db_sync" glance
 systemctl enable glance-api
 service glance-api restart
