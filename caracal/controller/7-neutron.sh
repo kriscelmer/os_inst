@@ -15,15 +15,14 @@ openstack service create --name neutron --description "OpenStack Networking" net
 openstack endpoint create --region RegionOne network public http://10.0.0.11:9696
 openstack endpoint create --region RegionOne network internal http://10.0.0.11:9696
 openstack endpoint create --region RegionOne network admin http://10.0.0.11:9696
-DEBIAN_FRONTEND=noninteractive apt-get install -y neutron-server neutron-plugin-ml2 neutron-linuxbridge-agent neutron-l3-agent neutron-dhcp-agent neutron-metadata-agent > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y neutron-server neutron-plugin-ml2 neutron-openvswitch-agent neutron-l3-agent neutron-dhcp-agent neutron-metadata-agent > /dev/null
 crudini --set /etc/neutron/neutron.conf database connection 'mysql+pymysql://neutron:openstack@controller/neutron'
 crudini --set /etc/neutron/neutron.conf DEFAULT core_plugin ml2
 crudini --set /etc/neutron/neutron.conf DEFAULT service_plugins router
-crudini --set /etc/neutron/neutron.conf DEFAULT allow_overlapping_ips true
-crudini --set /etc/neutron/neutron.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller:5672/'
+crudini --set /etc/neutron/neutron.conf DEFAULT transport_url 'rabbit://openstack:openstack@controller'
 crudini --set /etc/neutron/neutron.conf DEFAULT auth_strategy keystone
-crudini --set /etc/neutron/neutron.conf keystone_authtoken www_authenticate_uri http://controller:5000/v3
-crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_url http://controller:5000/v3
+crudini --set /etc/neutron/neutron.conf keystone_authtoken www_authenticate_uri http://controller:5000
+crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_url http://controller:5000
 crudini --set /etc/neutron/neutron.conf keystone_authtoken memcached_servers controller:11211
 crudini --set /etc/neutron/neutron.conf keystone_authtoken auth_type password
 crudini --set /etc/neutron/neutron.conf keystone_authtoken project_domain_name default
@@ -33,7 +32,7 @@ crudini --set /etc/neutron/neutron.conf keystone_authtoken username neutron
 crudini --set /etc/neutron/neutron.conf keystone_authtoken password openstack
 crudini --set /etc/neutron/neutron.conf DEFAULT notify_nova_on_port_status_changes true
 crudini --set /etc/neutron/neutron.conf DEFAULT notify_nova_on_port_data_changes true
-crudini --set /etc/neutron/neutron.conf nova auth_url http://controller:5000/v3
+crudini --set /etc/neutron/neutron.conf nova auth_url http://controller:5000
 crudini --set /etc/neutron/neutron.conf nova auth_type password
 crudini --set /etc/neutron/neutron.conf nova project_domain_name default
 crudini --set /etc/neutron/neutron.conf nova user_domain_name default
@@ -44,11 +43,10 @@ crudini --set /etc/neutron/neutron.conf nova password openstack
 crudini --set /etc/neutron/neutron.conf oslo_concurrency lock_path /var/lib/neutron/tmp
 crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 type_drivers 'flat,vlan,vxlan'
 crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 tenant_network_types vxlan
-crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 mechanism_drivers linuxbridge,l2population
+crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 mechanism_drivers openvswitch,l2population
 crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 extension_drivers port_security
 crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2_type_flat flat_networks provider
 crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2_type_vxlan vni_ranges 1:1000
-crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini securitygroup enable_ipset true
 crudini --set /etc/neutron/plugins/ml2/linuxbridge_agent.ini linux_bridge physical_interface_mappings provider:enp0s9
 crudini --set /etc/neutron/plugins/ml2/linuxbridge_agent.ini vxlan enable_vxlan true
 crudini --set /etc/neutron/plugins/ml2/linuxbridge_agent.ini vxlan local_ip 10.0.0.11
